@@ -1,0 +1,25 @@
+import "basic.proto";
+import "user.proto";
+import "action.proto";
+import "message.proto";
+
+enum PBResultCode{
+   SUCCESS = 0; 
+}
+
+message PBResponse
+{
+    required PBResultCode code = 1;
+    optional string error_message = 2;
+    
+    repeated PBAction actions = 10;
+    repeated PBMessage messages = 11;
+    repeated PBUserBasic users = 12;
+    repeated PBActivity activitys = 13;
+    repeated PBComment comments = 14;
+
+    optional PBUser user = 50;
+    optional PBAction action = 51;
+    optional PBMerchant merchant = 52;
+
+}

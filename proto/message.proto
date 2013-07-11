@@ -1,0 +1,30 @@
+import "basic.proto";
+
+
+enum PBMessageType{
+    TEXT = 1;
+    IMAGE = 2;
+    SOUND = 3;
+}
+
+enum PBMessageStatus{
+    UNREAD = 1;
+    READ = 2;
+    SENDING = 3;
+    SENT = 4;
+}
+
+message PBMessage{
+    required string message_id = 1;
+    required string from_uid = 2;
+    required string to_uid = 3;
+    required PBMessageType type = 4;
+    required PBMessageStatus status = 5;
+    required int32 c_date = 6;
+
+    optional string text = 10;
+    optional string image_url = 11;
+    optional string sound_url = 12;
+} 
+
+//node.js socket.io

@@ -1,0 +1,115 @@
+import "basic.proto";
+enum PBRelation
+{
+    FOLLOW = 1;
+    FAN = 2;
+    FRIEND = 3;
+    BLACK = 4;
+}
+
+
+enum PBRegType{
+    NICK = 1;
+    QQ = 3;
+    RENREN = 4;
+    EMAIL = 5;
+}
+
+enum PBUserRole{
+    USER = 1;
+    AMDIN = 2;
+    VIP = 3;
+    FORBIDDEN = 4;
+}
+
+
+enum PBUserStatus{
+    OFFLINE = 1;
+    ONLINE = 2;
+    HIDDEN = 3;
+}
+
+
+message PBSNS{
+    optional string tel_number = 1;
+    optional string qq_number = 2;
+    optional string qq_weibo_id = 3;
+    optional string qq_weibo_nick = 4;
+    optional string sina_weibo_id = 5;
+    optional string sina_weibo_nick = 6;
+    optional string renren_id = 7;
+    optional string renren_nick = 8;
+}
+
+message PBLog{
+    optional int32 last_log_date = 1;
+    optional int32 last_log_ip = 2;
+    optional float last_log_latitude = 3;
+    optional float last_log_longitude = 4;
+}
+
+
+message PBRegistion
+{
+    required int32 reg_date = 1; 
+    optional PBRegType reg_type = 2[default = NICK]; 
+    optional int32 reg_ip = 3; 
+}    
+
+
+
+message PBDevice{
+    required string device_id = 1;
+    required string device_os = 2;
+    optional string device_token = 3; //for ios push
+    optional string device_name = 4;
+}
+
+message PBStatistic{
+//total count
+    optional int32 fan_count = 1;
+    optional int32 follow_count= 2;
+    optional int32 my_activity = 3;
+
+//new count
+
+    optional int32 new_fan_count = 20;
+    optional int32 new_follow_count = 22;
+    optional int32 new_message_count = 23;
+    optional int32 new_feed_count= 24;
+    optional int32 new_notice_count= 25;
+}
+
+
+message PBUserBasic{
+    required string uid = 1;
+    required string uname= 2;
+    optional string nick = 3;
+    optional PBUserRole role = 4[default=USER];
+    optional bool gender = 5;
+    optional string avatar = 6;
+    optional PBUserStatus status = 7[default=OFFLINE];
+    optional string introduction = 8;
+    optional int32 birth_date= 9;
+    repeated string tags = 10;
+    
+    //for upload api
+    repeated string password = 11;
+
+    //for return not for store
+    optional int32 PBRelation = 20;
+    optional string note_name = 21;
+
+}
+
+
+message PBUser
+{
+    required PBUserBasic basic_info = 1;
+    optional PBRegistion registion = 2;
+    optional PBLog log_info = 3;
+    optional PBDevice device_info = 4;
+    optional PBSNS sns_info = 5;
+    optional PBStatistic statistic = 6;
+}
+

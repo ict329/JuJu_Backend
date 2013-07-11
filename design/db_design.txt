@@ -1,0 +1,159 @@
+
+/////////////////////////////////////////////
+Common Document
+
+
+location(Document)
+    contury_code
+    province
+    city
+    latitude
+    longitude
+
+
+comment(Document)
+
+    uid
+    content
+    star //多少星
+    create_date
+    is_reply//也可以是回复
+    reply_id//如果是回复的话，这个指向它回复的id
+
+
+Contact(Document)
+    tel_number
+    qq_number;
+    sina_nick
+    weixin_id
+    
+
+
+
+
+/////////////////////////////////////////////
+
+User:
+
+basic(Document)
+    nick_name
+    gender
+    avatar
+    status //online offline
+    privilege //32bit 
+    introduction (string)
+
+sns(Document)
+    tel
+    qq
+    qqwb_id
+    qqwb_nick
+    sina id
+    sina nick
+    renren id
+    renren nick
+
+log(Document)
+    last_log_date
+    last_log_ip
+    last_log_lat
+    last_log_long
+
+register(Document)
+    reg_date
+    reg_ip
+    reg_type //register email, qq, sina,
+
+device(Document)
+    device os
+    device id
+    device token //for push
+    device name
+
+statistics (Document) //统计数据
+    fan_count
+    follow_count
+    new_fan_count
+    new_message_count
+    new_comment_count
+
+location(Document)
+
+/////////////////////////////////////////////
+//用户上次的头像会放到相应的album中
+
+Album
+    uid
+    album_name
+    image_list (array)
+
+
+
+/////////////////////////////////////////////
+Action_Comment
+    comment(Document)
+
+
+
+
+
+/////////////////////////////////////////////
+//用户的动态（Activity, Share, Take Part in）
+
+Activity
+    photo_list(array)
+    content
+
+    location(Document)
+    contact(Document)
+
+    statistic(Document)
+    comment_count //评论条数
+    Interested_count //感兴趣的人数
+    participant_count //参加的人数
+    share_count //参加的条目
+
+
+/////////////////////////////////////////////
+Share
+    activity_id //指向被分享的动态
+    statistic(Document)
+    comment_count //评论条数
+    digest //活动的摘要
+
+
+/////////////////////////////////////////////
+动态表，可以是发布一个活动，可以是分享个活动
+Action
+    uid
+    create_date
+    type  //根据type来判别 Activity还是Share
+    comment_list (array) 存的是Action_Comment id组成的数组
+    activity(Document)
+    share(Document)
+
+
+
+//新建一个User的时候会预先插入对应的多条Index记录
+/////////////////////////////////////////////
+Index
+    uid
+    type //timeline, interesting activity, join activity
+    count
+    index_list(array)
+
+
+
+/////////////////////////////////////////////
+用户关系表
+Relation
+    uid
+    fid
+    create_date
+    type //0x1 follow, 0x100 black
+    note //名称备注
+    
+
+
+
+

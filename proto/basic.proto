@@ -1,0 +1,13 @@
+
+message PBLocation{
+    required int32 contury_code = 1;
+    required string province = 2;
+    required string city = 3;
+    optional float latitude = 4;
+    optional float longitude = 5;
+}
+
+message PBContact{
+    repeated string tel_number = 1;  
+  
+}

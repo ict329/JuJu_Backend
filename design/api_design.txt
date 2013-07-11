@@ -1,0 +1,362 @@
+
+Version 1.0
+=========================================================
+=========================================================
+
+Common error code from 900000-999999
+
+900000 system error
+900001 network error
+900002 time out
+900003 parse data exception
+900004 privilege not enough 
+
+R for Required
+O for Optional 
+
+=========================================================
+=========================================================
+
+User (Error Code from 10000 - 19999)
+
+=========================================================
+=========================================================
+
+
+        Register 
+            Request
+                nick_name(R)
+                password (R)
+                device_id (R)
+                device_type // 1 for iphone, 2 for ipad, 100 for android (R)
+                ip (O)
+                os //ios 6.1 (O)
+                longitude (O)
+                latitude (O)
+
+            Response
+                PBUser
+
+                Code: 
+                10001 nick_name exists
+
+
+/////////////////////////////////////////////////////////
+
+
+        Login (10100)
+
+            Request:
+                type 0
+                nick/ sina id/ qq id/ facebook id/ twitter id (R)
+                token / password (R)
+
+            Response
+                PBUser
+            Code:
+                10101 user not exists
+                10102 password incorrect
+
+/////////////////////////////////////////////////////////
+
+
+        Logout (10200)
+            Request:
+                uid
+
+            
+/////////////////////////////////////////////////////////
+
+        Update Profile (10300)
+
+            Requests:
+                //Basic info
+                nick
+                password
+                role //PBUserRole 
+                gender 
+                avatar 
+                status //PBUserStatus 
+                introduction 
+                birth_date
+                note_name 
+
+                //Location
+                contury_code 
+                province 
+                city 
+                latitude 
+                longitude 
+                tags
+
+
+            Response    
+                Code: 
+                10301 nick name exists
+
+                PBUser 
+               
+/////////////////////////////////////////////////////////
+
+         Update Device
+            Request
+                device_id 
+                device_os 
+                device_token 
+                device_name 
+
+
+/////////////////////////////////////////////////////////
+
+        Bind SNS (10500)
+            Requests:
+                type 1 sina, 2 qq, 3 renren 4  fb, 5 twitter
+                SNS ID
+                token      
+
+/////////////////////////////////////////////////////////
+
+        Get Profile/Detail (10500)
+            Requests:
+                target user id 
+                target user nick
+
+            Response
+                Code:
+                10501 user not exists
+                10502 user status is exception
+
+                PBUser
+
+
+
+=========================================================
+=========================================================
+
+Relation (Error Code from 20000 - 29999)
+
+=========================================================
+=========================================================
+
+        (备)Mark friend (20000)
+
+            Requests:
+                fid
+                mark_name
+            
+            Response:
+                Code:
+                Data:
+
+/////////////////////////////////////////////////////////
+
+        Follow  (20100)
+
+            Requests:
+                fid list
+            
+            Response:
+                Code:
+                    privilege not enough
+
+/////////////////////////////////////////////////////////
+
+        Unfollow (20200)
+            Requests:
+                fid list
+            
+            Response:
+                Code:
+
+/////////////////////////////////////////////////////////
+
+        Black user (20300)
+            Requests:
+                fid list
+        
+            Response:
+                Code:
+
+/////////////////////////////////////////////////////////
+
+        Get follow list (20400)
+            Requests:
+                offset
+                limit
+
+            Response:
+                Code:
+                
+                PBUserBasic List
+                
+/////////////////////////////////////////////////////////
+
+        Get follow list (20500)
+            Requests:
+                offset
+                limit
+
+            Response:
+                Code:
+                PBUserBasic List
+
+=========================================================
+=========================================================
+
+Action / Activity (Error Code from 40000 - 49999)
+
+=========================================================
+=========================================================
+
+        Create Activity
+            Requests:
+                type (PBActivityType)
+                uid 
+   
+                party (PBParty )
+                traffic (PBTraffic)
+                shopping (PBShopping )
+    
+
+            Response:
+
+                Code:
+
+                PBAction
+
+
+=========================================================
+=========================================================
+
+Action (may be say or activity)
+
+=========================================================
+=========================================================
+
+        Share Action:
+            Request:
+                action_id
+                uid
+                comment
+            
+            Response:
+               Code
+                privilege
+                action deleted
+              
+              Data
+                shareAction(PBAction) 
+
+/////////////////////////////////////////////////////////
+
+        Add comment
+            Requests:
+                action_id
+                content
+                reply_action_id
+                reply_uid
+    
+            Response:
+                Code:
+                   privilege 
+                
+                Data
+                    PBComment
+
+/////////////////////////////////////////////////////////
+
+        Delete action
+            Request:
+                action_id
+                uid
+
+            Response:
+                Code:
+                    privilege
+
+/////////////////////////////////////////////////////////
+
+        Up/Down Action
+            Request:
+                action_id
+                uid
+
+/////////////////////////////////////////////////////////
+
+        Get Global Action List
+            Request:
+                type(Party, Traffic, Shopping)
+                city
+                latitude
+                longitude
+                offset 
+                limit
+                sort_type
+
+            Response:
+                PBAction List
+                
+/////////////////////////////////////////////////////////
+
+        Get User Action List
+            Request:
+                target_uid
+                type(Party, Traffic, Shopping)
+                offset 
+                limit
+                sort_type
+            
+            Response:
+                PBAction List
+               
+
+/////////////////////////////////////////////////////////
+
+        Get Action Comment List
+            Request:
+                action_id
+                offset 
+                limit
+                sort_type
+            
+            Response:
+                PBAction List
+                
+/////////////////////////////////////////////////////////
+
+        Get My Comment List
+            Request:
+                uid 
+                offset 
+                limit
+            
+            Response:
+                PBAction List
+               
+/////////////////////////////////////////////////////////
+
+        Delete Comment 
+            Request:
+                comment_id
+                uid
+
+            Response:
+                Code:
+                    privilege
+
+/////////////////////////////////////////////////////////
+
+        Get Feed List
+            Request:
+                uid
+                offset 
+                limit
+                sort_type
+            
+            Response:
+                PBAction List
+                
+/////////////////////////////////////////////////////////
+
+
+Message...
