@@ -3,8 +3,7 @@
 from mongoengine import *
 
 class UserBasic(EmbeddedDocument):
-    uid = StringField(max_length=50, required=True)
-    uname = StringField(max_length=50, required=True)
+    uname = StringField(max_length=50, required=True, unique = True)
     nick = StringField(max_length=50, required=True)
     role = IntField()
     gender = BooleanField()
@@ -53,7 +52,3 @@ class User(Document):
     log_info = EmbeddedDocumentField(Log)
     sns_info = EmbeddedDocumentField(SNS)
     statistic = EmbeddedDocumentField(Statistic)
-
-
-
-
