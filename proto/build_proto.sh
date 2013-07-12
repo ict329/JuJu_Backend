@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DST_DIR=../src/pbmodel
-SRC_DIR=../proto
+DST_DIR=../pbmodels
+SRC_DIR=.
 
 
 cd $SRC_DIR

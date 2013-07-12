@@ -86,7 +86,6 @@ message PBStatistic{
 
 
 message PBUserBasic{
-    required string uid = 1;
     required string uname= 2;
     optional string nick = 3;
     optional PBUserRole role = 4[default=USER];
@@ -109,11 +108,12 @@ message PBUserBasic{
 
 message PBUser
 {
-    required PBUserBasic basic_info = 1;
-    optional PBRegistion registion = 2;
-    optional PBLog log_info = 3;
-    optional PBDevice device_info = 4;
-    optional PBSNS sns_info = 5;
-    optional PBStatistic statistic = 6;
+    required string uid = 1;
+    required PBUserBasic basic_info = 2;
+    optional PBRegistion registion = 3;
+    optional PBLog log_info = 4;
+    optional PBDevice device_info = 5;
+    optional PBSNS sns_info = 6;
+    optional PBStatistic statistic = 7;
 }
 
