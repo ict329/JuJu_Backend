@@ -11,7 +11,7 @@ class UserBasic(EmbeddedDocument):
     avatar = StringField()
     status = IntField()
     introduction = StringField()
-    birth_date = IntField()
+    birth_date = DateTimeField()
     tags = ListField(StringField())
 
 class SNS(EmbeddedDocument):
@@ -25,7 +25,7 @@ class SNS(EmbeddedDocument):
     renren_nick = StringField(max_length=50)
 
 class Log(EmbeddedDocument):
-    last_log_date = IntField()
+    last_log_date = DateTimeField()
     last_log_ip = IntField()
     last_log_latitude = FloatField()
     last_log_longitude = FloatField()
@@ -42,7 +42,7 @@ class Device(EmbeddedDocument):
     device_name = StringField(max_length=50, required=True)
 
 class Registion(EmbeddedDocument):
-    reg_date = IntField(required=True)
+    reg_date = DateTimeField(required=True)
     reg_type = IntField(default=1)
     reg_ip = IntField()
 
