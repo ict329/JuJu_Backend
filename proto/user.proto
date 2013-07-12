@@ -9,10 +9,14 @@ enum PBRelation
 
 
 enum PBRegType{
-    NICK = 1;
-    QQ = 3;
-    RENREN = 4;
-    EMAIL = 5;
+    NICK = 0;
+    SINA_WEIBO = 1;
+    QQ_WEIBO = 2;
+    RENREN = 3;
+    QQ_SPACE = 4;
+    KAIXIN = 5;
+    FACEBOOK = 6;
+    TWITTER = 7;
 }
 
 enum PBUserRole{
