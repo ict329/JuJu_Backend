@@ -48,7 +48,7 @@ class Registion(EmbeddedDocument):
 class User(Document):
     basic_info = EmbeddedDocumentField(UserBasic, required=True)
     registion = EmbeddedDocumentField(Registion)
-    device_info = EmbeddedDocumentField(Registion)
+    device_info = EmbeddedDocumentField(Device)
     log_info = EmbeddedDocumentField(Log)
     sns_info = EmbeddedDocumentField(SNS)
     statistic = EmbeddedDocumentField(Statistic)

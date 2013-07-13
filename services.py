@@ -4,7 +4,7 @@
     对外暴露的统一的服务模块，用于注册所有服务,api层只要引入这个文件即可
 """
 
-from users.userService import UserService
+from users.user_service import UserService
 from users.bind_sns import BindSNSService
 from users.get_profile import GetProfileService
 from users.login import LoginService
