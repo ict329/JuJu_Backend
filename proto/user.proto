@@ -9,15 +9,19 @@ enum PBRelation
 
 
 enum PBRegType{
-    NICK = 1;
-    QQ = 3;
-    RENREN = 4;
-    EMAIL = 5;
+    NICK = 0;
+    SINA_WEIBO = 1;
+    QQ_WEIBO = 2;
+    RENREN = 3;
+    QQ_SPACE = 4;
+    KAIXIN = 5;
+    FACEBOOK = 6;
+    TWITTER = 7;
 }
 
 enum PBUserRole{
     USER = 1;
-    AMDIN = 2;
+    ADMIN = 2;
     VIP = 3;
     FORBIDDEN = 4;
 }
@@ -82,7 +86,6 @@ message PBStatistic{
 
 
 message PBUserBasic{
-    required string uid = 1;
     required string uname= 2;
     optional string nick = 3;
     optional PBUserRole role = 4[default=USER];
@@ -105,11 +108,12 @@ message PBUserBasic{
 
 message PBUser
 {
-    required PBUserBasic basic_info = 1;
-    optional PBRegistion registion = 2;
-    optional PBLog log_info = 3;
-    optional PBDevice device_info = 4;
-    optional PBSNS sns_info = 5;
-    optional PBStatistic statistic = 6;
+    required string uid = 1;
+    required PBUserBasic basic_info = 2;
+    optional PBRegistion registion = 3;
+    optional PBLog log_info = 4;
+    optional PBDevice device_info = 5;
+    optional PBSNS sns_info = 6;
+    optional PBStatistic statistic = 7;
 }
 

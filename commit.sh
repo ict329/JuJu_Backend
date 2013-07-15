@@ -1,5 +1,8 @@
 #!/bin/bash
 
+./rmpyc.sh
+git checkout *.pyc
+
 line=' ========= '
 if [ -z "$1" ]; then
     echo "$line"" Commit message is empty. Can  not be comitted ""$line"

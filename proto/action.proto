@@ -97,8 +97,8 @@ message PBParty{
 
 message PBTraffic{
     optional int32 member_limit = 1;
-    optional PBLocation from= 2;
-    optional PBLocation to = 3;
+    optional PBLocation start_loc = 2;
+    optional PBLocation end_loc = 3;
     optional PBContact contact = 4;
     optional int32 join_deadtime = 5;
     optional int32 hold_time = 6;
@@ -122,16 +122,31 @@ message PBActivity{
    required PBActivityType type = 1;
    required int32 c_date = 2;
    required string uid = 3;
+
+   //标记，用于生成二维码，签到的时候用到
+   optional string token = 4;
    
    optional PBParty party = 10;
    optional PBTraffic traffic = 11;
    optional PBShopping shopping = 12;
 
+   //参考价格 可以从爱帮获取
+   optional int32 price = 13;
+
+   //实到的人员列表
+   repeated string participants = 14;
+   //报名的人员列表
+   repeated string signups = 15;
+
    //count
    optional int32 comment_count = 50;
    optional int32 share_count = 51;
-   optional int32 interested_count = 52;
+   //报名人数
+   optional int32 signup_count = 52;
+   //参加人数
    optional int32 participant_count = 53;
+   //收藏人数
+   optional int32 mark_count = 54;
 }
 
 message PBJoin{
