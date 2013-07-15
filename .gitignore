@@ -1,2 +1,4 @@
 */*.pyc
 *.pyc
+test.py
+rmpyc.sh
