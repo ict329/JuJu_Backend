@@ -21,7 +21,7 @@ enum PBRegType{
 
 enum PBUserRole{
     USER = 1;
-    AMDIN = 2;
+    ADMIN = 2;
     VIP = 3;
     FORBIDDEN = 4;
 }
