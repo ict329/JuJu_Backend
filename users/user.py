@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # user db model
 from mongoengine import *
-from pbmodel.basic_pb2 import *
-from pbmodel.user_pb2 import *
+from pbmodels.basic_pb2 import *
+from pbmodels.user_pb2 import *
 from common.utils.date_util import *
 
 class UserBasic(EmbeddedDocument):
@@ -16,7 +16,7 @@ class UserBasic(EmbeddedDocument):
     birth_date = DateTimeField()
     tags = ListField(StringField())
 
-    def update_pb(basic_info):
+    def update_pb(self, basic_info):
         basic_info.uname = self.uname
         basic_info.nick = self.nick
         basic_info.role = self.role
