@@ -5,10 +5,12 @@ from helpers import register_blueprints
 import api
 from mongoengine import connect
 from settings import MONGO_CONFIG
+from core.session import RedisSessionInterface
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
+    app.session_interface = RedisSessionInterface()
     return app
 
 def register_all_blueprints(app):
