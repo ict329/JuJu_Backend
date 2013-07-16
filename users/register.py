@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-from common.utils.str_util import *
-from common.utils.request_util import get_value
+from flask import request
 import logging
 
+from utils import *
+from constants import * 
 from core.service import JJService
 
-from flask import request
-from constant.service_constant import ARGS
 from users.user import User
 from users.user_manager import register
 

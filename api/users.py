@@ -6,8 +6,7 @@
 
 from flask import Blueprint
 from services import UserService
-from models import UserBasic, User
-from pbmodels.user_pb2 import *
+from models import *
 from services import RegisterService
 from flask import request
 
