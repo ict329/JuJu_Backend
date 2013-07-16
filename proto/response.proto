@@ -7,6 +7,8 @@ enum PBResultCode{
    SUCCESS = 0; 
    SYSTEM_ERROR = 1;
    PARSE_PB_ERROR = 2;
+   PARAMETER_ERROR = 3;
+   AUTH_ERROR = 4;
 }
 
 message PBResponse

@@ -11,6 +11,7 @@ from common.utils.parse_util import *
 class UserBasic(EmbeddedDocument):
     uname = StringField(max_length=50, required=True, unique = True)
     nick = StringField(max_length=50, required=True)
+    password = StringField(max_length=50)
     role = IntField()
     gender = BooleanField()
     avatar = StringField()
@@ -98,6 +99,7 @@ class User(Document):
     log_info = EmbeddedDocumentField(Log)
     sns_info = EmbeddedDocumentField(SNS)
     statistic = EmbeddedDocumentField(Statistic)
+
 
     def get_field_list(self):
         return ('basic_info', 'registion', 'device_info', 'log_info', 'sns_info','statistic')

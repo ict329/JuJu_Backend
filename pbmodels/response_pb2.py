@@ -23,6 +23,14 @@ _PBRESULTCODE = descriptor.EnumDescriptor(
       name='PARSE_PB_ERROR', index=2, number=2,
       options=None,
       type=None),
+    descriptor.EnumValueDescriptor(
+      name='PARAMETER_ERROR', index=3, number=3,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='AUTH_ERROR', index=4, number=4,
+      options=None,
+      type=None),
   ],
   options=None,
 )
@@ -31,6 +39,8 @@ _PBRESULTCODE = descriptor.EnumDescriptor(
 SUCCESS = 0
 SYSTEM_ERROR = 1
 PARSE_PB_ERROR = 2
+PARAMETER_ERROR = 3
+AUTH_ERROR = 4
 
 
 

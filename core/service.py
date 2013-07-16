@@ -3,8 +3,11 @@ import common.utils.str_util
 import common.utils.request_util
 import logging
 
+
 from flask import request
 from constant.service_constant import ARGS
+from pbmodels.response_pb2 import *
+from common.utils.response_util import *
 
 class Service(object):
 
@@ -33,6 +36,7 @@ class JJService(object):
         self.data = None
         self.request = request
 
+    
 
     #protected methods, to be override
     def _parse_request(self):
@@ -48,15 +52,23 @@ class JJService(object):
         return self.__class__.__name__
 
     def _handle_error(self):
-        return self.__class__.__name__
-
+        response = get_error_response(self.code, 'Parameters missed')
+        return response.SerializeToString()
 
     #should not be override!!
     def handle(self):
-        self._parse_request()
+        try:
+            self._parse_request()
 
-        if self._check_parameters() and self._authenticate():
+            if not self._check_parameters():
+                self.code = PARAMETER_ERROR 
+                return self._handle_error()
+            if not self._authenticate():
+                self.code = AUTH_ERROR 
+                return self._handle_error()
             return self._handle_data()
-        else:
-            return self._handle_error()
+        except:
+            self.code = SYSTEM_ERROR
+            response = get_error_response(self.code, 'System Error')
+            return response.SerializeToString()
 
