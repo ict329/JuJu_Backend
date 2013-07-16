@@ -5,7 +5,6 @@ import logging
 
 
 from flask import request
-from constant.service_constant import ARGS
 from pbmodels.response_pb2 import *
 from common.utils.response_util import *
 
