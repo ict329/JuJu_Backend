@@ -1,34 +1,45 @@
+# -*- coding: utf-8 -*-
 from flask import request
+import logging
+
+from utils import *
+from constants import * 
 from core.service import JJService
-from common.utils.request_util import get_value
-from constant.service_constant import ARGS
+
+from users.user import User
+from users.user_manager import register
+
 
 class RegisterService(JJService):
+
+    log = logging.getLogger('JJService')
+
     def __init__(self, request):
-        self.code = 0
-        self.data = None
         self.request = request
-   
+
+
+    #protected methods, to be override
     def _parse_request(self):
-        get = get_value
+        self.uname = get_value(self.request, 'uname')
+        self.password = get_value(self.request, 'password')
 
-        self.uname = get(self.request, ARGS.P_UNAME)
-        self.password = get(self.request, ARGS.P_PASSWORD)
+        return True
 
-         
     def _check_parameters(self):
-        if not JJService._check_parameters(self):
+        if self.uname is None:
+            return False
+        if self.password is None:
             return False
         return True
 
     def _authenticate(self):
-        if not JJService._authenticate(self):
-            return False
         return True
 
     def _handle_data(self):
-#        return self.__class__.__name__ 
-        return self.request.remote_addr
-
+        user = register(self.uname, self.password)
+        pbuser = user.build_pb()
+        return pbuser.SerializeToString()
+        
     def _handle_error(self):
-        return self.__class__.__name__ 
+        return JJService._handle_error(self)
+

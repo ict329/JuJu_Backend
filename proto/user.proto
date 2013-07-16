@@ -1,6 +1,7 @@
 import "basic.proto";
 enum PBRelation
 {
+    STRANGE = 0;
     FOLLOW = 1;
     FAN = 2;
     FRIEND = 3;
@@ -21,7 +22,7 @@ enum PBRegType{
 
 enum PBUserRole{
     USER = 1;
-    AMDIN = 2;
+    ADMIN = 2;
     VIP = 3;
     FORBIDDEN = 4;
 }
@@ -100,7 +101,7 @@ message PBUserBasic{
     repeated string password = 11;
 
     //for return not for store
-    optional int32 PBRelation = 20;
+    optional PBRelation relation = 20;
     optional string note_name = 21;
 
 }

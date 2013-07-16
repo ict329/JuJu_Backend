@@ -8,6 +8,7 @@ from flask import Blueprint
 from services import UserService
 from models import UserBasic, User
 from pbmodels.user_pb2 import *
+from flask import session, request
 
 bp = Blueprint('users', __name__, url_prefix='/api/users')
 
@@ -46,4 +47,13 @@ def count_user():
 @bp.route('/update')
 def update_user():
     return ''
-pass
+
+@bp.route("/set")
+def set_session():
+    session['data'] = request.args['user']
+    return session['data']
+
+
+@bp.route("/get")
+def get_session():
+    return session.get('data', '')
