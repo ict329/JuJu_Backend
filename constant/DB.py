@@ -12,5 +12,4 @@ class TABLES:
 class FIELDS:
     F_ID = '_id'
     F_UNAME = 'uname'
-
     
