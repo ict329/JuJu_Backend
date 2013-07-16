@@ -485,9 +485,9 @@ _PBUSERBASIC = descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='PBRelation', full_name='PBUserBasic.PBRelation', index=10,
-      number=20, type=5, cpp_type=1, label=1,
-      default_value=0,
+      name='relation', full_name='PBUserBasic.relation', index=10,
+      number=20, type=14, cpp_type=8, label=1,
+      default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -575,6 +575,7 @@ import basic_pb2
 _PBREGISTION.fields_by_name['reg_type'].enum_type = _PBREGTYPE
 _PBUSERBASIC.fields_by_name['role'].enum_type = _PBUSERROLE
 _PBUSERBASIC.fields_by_name['status'].enum_type = _PBUSERSTATUS
+_PBUSERBASIC.fields_by_name['relation'].enum_type = _PBRELATION
 _PBUSER.fields_by_name['basic_info'].message_type = _PBUSERBASIC
 _PBUSER.fields_by_name['registion'].message_type = _PBREGISTION
 _PBUSER.fields_by_name['log_info'].message_type = _PBLOG
