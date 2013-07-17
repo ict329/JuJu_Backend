@@ -2,17 +2,19 @@
 from flask import request
 import logging
 
-from utils import *
-from constants import * 
+#from utils import *
+#from constants import * 
 from core.service import JJService
 
 from users.user import User
-from users.user_manager import register
 
+import users.user_manager as user_manager
+import common.utils.request_util as request_util 
+import constant.para as para
 
 class RegisterService(JJService):
 
-    log = logging.getLogger('JJService')
+    log = logging.getLogger('RegisterService')
 
     def __init__(self, request):
         self.request = request
@@ -20,8 +22,9 @@ class RegisterService(JJService):
 
     #protected methods, to be override
     def _parse_request(self):
-        self.uname = get_value(self.request, 'uname')
-        self.password = get_value(self.request, 'password')
+        self.uname =  request_util.get_value(self.request, para.UNAME)
+        self.password = request_util.get_value(self.request, para.PASSWORD) 
+        self.ip = request.remote_addr
 
         return True
 
@@ -36,9 +39,11 @@ class RegisterService(JJService):
         return True
 
     def _handle_data(self):
-        user = register(self.uname, self.password)
-        pbuser = user.build_pb()
-        return pbuser.SerializeToString()
+        user = user_manager.register(self.uname, self.password, ip=request.remote_addr)
+        if user is not None:
+            pbuser = user.build_pb()
+            return pbuser.SerializeToString()
+        return 'Error!!!'
         
     def _handle_error(self):
         return JJService._handle_error(self)

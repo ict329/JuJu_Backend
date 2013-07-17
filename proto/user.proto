@@ -54,11 +54,11 @@ message PBLog{
 }
 
 
-message PBRegistion
+message PBRegistration
 {
     required int32 reg_date = 1; 
     optional PBRegType reg_type = 2[default = NICK]; 
-    optional int32 reg_ip = 3; 
+    optional string reg_ip = 3; 
 }    
 
 
@@ -111,7 +111,7 @@ message PBUser
 {
     required string uid = 1;
     required PBUserBasic basic_info = 2;
-    optional PBRegistion registion = 3;
+    optional PBRegistration reg_info = 3;
     optional PBLog log_info = 4;
     optional PBDevice device_info = 5;
     optional PBSNS sns_info = 6;

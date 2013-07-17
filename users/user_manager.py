@@ -1,7 +1,10 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 # -*- 2013-07-16 -*-
 
 from users.user import *
+import datetime
+import pbmodels.user_pb2 as user_pb2
+import constant.para as para
 
 def get_user(uid):
     try:
@@ -15,18 +18,28 @@ def get_user_by_uname(uname):
     except:
         return None
 
-def register(uname, password):
+def register(uname, password, **fields):
     user = User()
+    
     basic = UserBasic()
     basic.uname = uname
     basic.password = password
     basic.nick = uname
     user.basic_info = basic
-    try:
-        user.save()
-        return user
-    except:
-        return None
+
+    reg_info = Registration()
+    reg_info.reg_date = datetime.datetime.now()
+    reg_info.reg_type = user_pb2.NICK
+    user.reg_info = reg_info
+    
+    if 'ip' in fields and fields['ip'] is not None:
+        reg_info.reg_ip = fields['ip']
+
+#try:
+    user.save()
+    return user
+#except:
+#return None
 
 
 

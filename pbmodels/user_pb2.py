@@ -12,19 +12,23 @@ _PBRELATION = descriptor.EnumDescriptor(
   filename='PBRelation',
   values=[
     descriptor.EnumValueDescriptor(
-      name='FOLLOW', index=0, number=1,
+      name='STRANGE', index=0, number=0,
       options=None,
       type=None),
     descriptor.EnumValueDescriptor(
-      name='FAN', index=1, number=2,
+      name='FOLLOW', index=1, number=1,
       options=None,
       type=None),
     descriptor.EnumValueDescriptor(
-      name='FRIEND', index=2, number=3,
+      name='FAN', index=2, number=2,
       options=None,
       type=None),
     descriptor.EnumValueDescriptor(
-      name='BLACK', index=3, number=4,
+      name='FRIEND', index=3, number=3,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='BLACK', index=4, number=4,
       options=None,
       type=None),
   ],
@@ -122,6 +126,7 @@ _PBUSERSTATUS = descriptor.EnumDescriptor(
 )
 
 
+STRANGE = 0
 FOLLOW = 1
 FAN = 2
 FRIEND = 3
@@ -258,30 +263,30 @@ _PBLOG = descriptor.Descriptor(
   options=None)
 
 
-_PBREGISTION = descriptor.Descriptor(
-  name='PBRegistion',
-  full_name='PBRegistion',
+_PBREGISTRATION = descriptor.Descriptor(
+  name='PBRegistration',
+  full_name='PBRegistration',
   filename='user.proto',
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
-      name='reg_date', full_name='PBRegistion.reg_date', index=0,
+      name='reg_date', full_name='PBRegistration.reg_date', index=0,
       number=1, type=5, cpp_type=1, label=2,
       default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='reg_type', full_name='PBRegistion.reg_type', index=1,
+      name='reg_type', full_name='PBRegistration.reg_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='reg_ip', full_name='PBRegistion.reg_ip', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      default_value=0,
+      name='reg_ip', full_name='PBRegistration.reg_ip', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -487,7 +492,7 @@ _PBUSERBASIC = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='relation', full_name='PBUserBasic.relation', index=10,
       number=20, type=14, cpp_type=8, label=1,
-      default_value=1,
+      default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -528,7 +533,7 @@ _PBUSER = descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='registion', full_name='PBUser.registion', index=2,
+      name='reg_info', full_name='PBUser.reg_info', index=2,
       number=3, type=11, cpp_type=10, label=1,
       default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -572,12 +577,12 @@ _PBUSER = descriptor.Descriptor(
 
 import basic_pb2
 
-_PBREGISTION.fields_by_name['reg_type'].enum_type = _PBREGTYPE
+_PBREGISTRATION.fields_by_name['reg_type'].enum_type = _PBREGTYPE
 _PBUSERBASIC.fields_by_name['role'].enum_type = _PBUSERROLE
 _PBUSERBASIC.fields_by_name['status'].enum_type = _PBUSERSTATUS
 _PBUSERBASIC.fields_by_name['relation'].enum_type = _PBRELATION
 _PBUSER.fields_by_name['basic_info'].message_type = _PBUSERBASIC
-_PBUSER.fields_by_name['registion'].message_type = _PBREGISTION
+_PBUSER.fields_by_name['reg_info'].message_type = _PBREGISTRATION
 _PBUSER.fields_by_name['log_info'].message_type = _PBLOG
 _PBUSER.fields_by_name['device_info'].message_type = _PBDEVICE
 _PBUSER.fields_by_name['sns_info'].message_type = _PBSNS
@@ -591,9 +596,9 @@ class PBLog(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _PBLOG
 
-class PBRegistion(message.Message):
+class PBRegistration(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _PBREGISTION
+  DESCRIPTOR = _PBREGISTRATION
 
 class PBDevice(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType

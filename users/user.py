@@ -80,20 +80,20 @@ class Device(EmbeddedDocument):
     def update_pb(self, device_info):
         update_pb_with_document(device_info, self, self.get_field_list())
 
-class Registion(EmbeddedDocument):
+class Registration(EmbeddedDocument):
     reg_date = DateTimeField(required=True)
     reg_type = IntField(default=1)
-    reg_ip = IntField()
+    reg_ip = StringField()
     def get_field_list(self):
         return ('reg_type', 'reg_ip')
 
-    def update_pb(self, registion):
-        update_pb_with_document(registion, self, self.get_field_list())
-        update_pb_with_value(registion, 'reg_date', datetime_to_timestamp(self.reg_date))
+    def update_pb(self, reg_info):
+        update_pb_with_document(reg_info, self, self.get_field_list())
+        update_pb_with_value(reg_info, 'reg_date', datetime_to_timestamp(self.reg_date))
 
 class User(Document):
     basic_info = EmbeddedDocumentField(UserBasic, required=True)
-    registion = EmbeddedDocumentField(Registion)
+    reg_info = EmbeddedDocumentField(Registration)
     device_info = EmbeddedDocumentField(Device)
     log_info = EmbeddedDocumentField(Log)
     sns_info = EmbeddedDocumentField(SNS)
@@ -101,13 +101,13 @@ class User(Document):
 
 
     def get_field_list(self):
-        return ('basic_info', 'registion', 'device_info', 'log_info', 'sns_info','statistic')
+        return ('basic_info', 'reg_info', 'device_info', 'log_info', 'sns_info','statistic')
 
     def update_pb(self, user):
         if self.basic_info is not None:
             self.basic_info.update_pb(user.basic_info) 
-        if self.registion is not None:
-            self.registion.update_pb(user.registion)
+        if self.reg_info is not None:
+            self.reg_info.update_pb(user.reg_info)
         if self.device_info is not None:
             self.device_info.update_pb(user.device_info)
         if self.log_info is not None:

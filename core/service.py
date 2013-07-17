@@ -56,7 +56,7 @@ class JJService(object):
 
     #should not be override!!
     def handle(self):
-        try:
+#        try:
             self._parse_request()
 
             if not self._check_parameters():
@@ -66,8 +66,8 @@ class JJService(object):
                 self.code = AUTH_ERROR 
                 return self._handle_error()
             return self._handle_data()
-        except:
-            self.code = SYSTEM_ERROR
-            response = get_error_response(self.code, 'System Error')
-            return response.SerializeToString()
+#        except:
+#            self.code = SYSTEM_ERROR
+#            response = get_error_response(self.code, 'System Error')
+#            return response.SerializeToString()
 
