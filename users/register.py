@@ -39,12 +39,13 @@ class RegisterService(JJService):
         return True
 
     def _handle_data(self):
+#TODO try to catch the exception and return the error response
+
         user = user_manager.register(self.uname, self.password, ip=request.remote_addr)
-        if user is not None:
-            pbuser = user.build_pb()
-            return pbuser.SerializeToString()
-        return 'Error!!!'
+        pbuser = user.build_pb()
+        return pbuser.SerializeToString()
         
     def _handle_error(self):
         return JJService._handle_error(self)
+
 

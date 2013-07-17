@@ -51,7 +51,7 @@ class JJService(object):
         return self.__class__.__name__
 
     def _handle_error(self):
-        response = get_error_response(self.code, 'Parameters missed')
+        response = get_error_response(self.code)
         return response.SerializeToString()
 
     #should not be override!!
@@ -68,6 +68,6 @@ class JJService(object):
             return self._handle_data()
 #        except:
 #            self.code = SYSTEM_ERROR
-#            response = get_error_response(self.code, 'System Error')
+#            response = get_error_response(self.code)
 #            return response.SerializeToString()
 

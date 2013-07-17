@@ -10,13 +10,16 @@ from services import RegisterService
 from models import UserBasic, User
 from pbmodels.user_pb2 import *
 from flask import session, request
-#from users.register import RegisterService
 
 bp = Blueprint('users', __name__, url_prefix='/api/users')
 
 @bp.route('/register')
 def register():
     return RegisterService(request).handle()
+
+
+#Below is test code 
+
 
 @bp.route('/add')
 def add_user():

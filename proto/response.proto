@@ -4,12 +4,29 @@ import "action.proto";
 import "message.proto";
 
 enum PBResultCode{
-   SUCCESS = 0; 
-   SYSTEM_ERROR = 1;
-   PARSE_PB_ERROR = 2;
-   PARAMETER_ERROR = 3;
-   AUTH_ERROR = 4;
+    UNKNOW_ERROR = -1;
+
+    SUCCESS = 0; 
+    SYSTEM_ERROR = 1;
+    PARSE_PB_ERROR = 2;
+    PARAMETER_ERROR = 3;
+    AUTH_ERROR = 4;
+    NETWORK_ERROR = 5;
+    TIMEOUT_ERROR = 6;
+
+// User error code: from 10000 to 19999
+
+    USER_NOT_EXISTS_ERROR = 10001;
+    PASSWORD_INCORRECT_ERROR = 10002;
+    USER_STATUS_EXCEPTION_ERROR = 10003;
+
+// Action error code: from 20000 to 29999
+
+    ACTION_NOT_EXISTS_ERROR = 20001;
+    ACTION_STATUS_EXCEPTION_ERROR = 20002;
 }
+
+
 
 message PBResponse
 {
