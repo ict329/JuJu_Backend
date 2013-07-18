@@ -42,7 +42,11 @@ class LoginService(JJService):
 
     def _handle_data(self):
         try:
-            user = user_manager.login(self.uname, self.password, ip=self.ip, latitude=self.latitude, longitude=self.longitude, device_id=self.device_id, device_name=self.device_name, device_os=self.device_os, device_token=self.device_token)
+            user = user_manager.login(self.uname, self.password, \
+                    ip=self.ip, latitude=self.latitude, longitude=self.longitude, \
+                    device_id=self.device_id, device_name=self.device_name, \
+                    device_os=self.device_os, device_token=self.device_token)
+
 #TODO set/update session
             pbuser = user.build_pb()
             return pbuser.SerializeToString()

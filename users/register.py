@@ -52,7 +52,11 @@ class RegisterService(JJService):
     def _handle_data(self):
 #TODO try to catch the exception and return the error response
 
-        user = user_manager.register(self.uname, self.password, ip=self.ip, latitude=self.latitude, longitude=self.longitude, device_id=self.device_id, device_name=self.device_name, device_os=self.device_os, device_token=self.device_token)
+        user = user_manager.register(self.uname, self.password, \
+                ip=self.ip, latitude=self.latitude, longitude=self.longitude, \
+                device_id=self.device_id, device_name=self.device_name, 
+                device_os=self.device_os, device_token=self.device_token)
+
         pbuser = user.build_pb()
         return pbuser.SerializeToString()
         
