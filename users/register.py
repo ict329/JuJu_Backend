@@ -8,7 +8,7 @@ from core.service import JJService
 
 from users.user import User
 
-import users.user_manager as user_manager
+import users.manager as user_manager
 import common.utils.request_util as request_util 
 import constant.para as para
 

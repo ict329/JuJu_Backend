@@ -2,7 +2,7 @@ from flask import request
 from core.service import JJService
 import constant.para as para
 import common.utils.request_util as request_util
-import users.user_manager as user_manager
+import users.manager as user_manager
 from users.user import User
 from pbmodels.response_pb2 import *
 

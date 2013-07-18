@@ -113,3 +113,8 @@ USER = "user"
 WAP_URL = "wap_url"
 WEB_URL = "web_url"
 WORK_TIME = "work_time"
+
+TYPE = 'type'
+SNS_ID = 'snsid'
+SNS_NICK = 'snsnick'
+SNS_TOKEN= 'snstoken'

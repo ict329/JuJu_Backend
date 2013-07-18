@@ -33,10 +33,14 @@ class SNS(EmbeddedDocument):
     qq_number = StringField(max_length=50)
     qq_weibo_id = StringField(max_length=50)
     qq_weibo_nick = StringField(max_length=50)
+    qq_weibo_token = StringField(max_length=50)
+    
     sina_weibo_id = StringField(max_length=50)
     sina_weibo_nick = StringField(max_length=50)
+    sina_weibo_token = StringField(max_length=50)
     renren_id = StringField(max_length=50)
     renren_nick = StringField(max_length=50)
+    renren_token = StringField(max_length=50)
     
     def get_field_list(self):
         return ('tel_number', 'qq_number', 'qq_weibo_id', 'qq_weibo_nick', 'sina_weibo_id', 'sina_weibo_nick','renren_id', 'renren_nick')

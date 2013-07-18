@@ -6,7 +6,7 @@
 
 from flask import Blueprint
 from services import UserService
-from services import RegisterService, LoginService, LogoutService
+from services import RegisterService, LoginService, LogoutService, SNSLoginService
 from models import UserBasic, User
 from pbmodels.user_pb2 import *
 from flask import session, request
@@ -24,6 +24,10 @@ def login():
 @bp.route('/logout')
 def logout():
     return LogoutService(request).handle()
+
+@bp.route('/snslogin')
+def snslogin():
+    return SNSLoginService(request).handle()
 
 #Below is test code 
 

@@ -8,6 +8,7 @@ from users.user_service import UserService
 from users.bind_sns import BindSNSService
 from users.get_profile import GetProfileService
 from users.login import LoginService
+from users.snslogin import SNSLoginService
 from users.logout import LogoutService
 from users.register import RegisterService
 from users.update_device import UpdateDeviceService
