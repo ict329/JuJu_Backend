@@ -26,6 +26,17 @@ class RegisterService(JJService):
         self.password = request_util.get_value(self.request, para.PASSWORD) 
         self.ip = request.remote_addr
 
+        self.latitude = request_util.get_value(self.request, para.LATITUDE)
+        self.latitude = str_util.get_float_value(self.latitude)
+        self.longitude = request_util.get_value(self.request, para.LONGITUDE)
+        self.longitude = str_util.get_float_value(self.longitude)
+        self.ip = self.request.remote_addr
+
+        self.device_id = request_util.get_value(self.request, para.DEVICE_ID)
+        self.device_os = request_util.get_value(self.request, para.DEVICE_OS)
+        self.device_name = request_util.get_value(self.request, para.DEVICE_NAME)
+        self.device_token = request_util.get_value(self.request, para.DEVICE_TOKEN)
+
         return True
 
     def _check_parameters(self):
@@ -41,7 +52,7 @@ class RegisterService(JJService):
     def _handle_data(self):
 #TODO try to catch the exception and return the error response
 
-        user = user_manager.register(self.uname, self.password, ip=request.remote_addr)
+        user = user_manager.register(self.uname, self.password, ip=self.ip, latitude=self.latitude, longitude=self.longitude, device_id=self.device_id, device_name=self.device_name, device_os=self.device_os, device_token=self.device_token)
         pbuser = user.build_pb()
         return pbuser.SerializeToString()
         

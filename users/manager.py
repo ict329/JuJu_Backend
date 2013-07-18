@@ -11,24 +11,58 @@ import logging
 
 log = logging.getLogger('UserManager')
 
+def _get_value_with_field(info, field):
+    if field in info and info[field] is not None:
+        return info[field]
+    return None
+
 def _update_log_info(log_info, info):
-    log.info("_update_log_info info = ")
-    log.info(info)
-    if para.IP in info:
-        log_info.last_log_ip = info[para.IP] 
-    if para.LATITUDE in info:
-        log_info.last_log_latitude = info[para.LATITUDE]
-    if para.LONGITUDE in info: 
-        log_info.last_log_longitude = info[para.LONGITUDE]
-
+    value = _get_value_with_field(info, para.IP)
+    if value is not None:
+        log_info.last_log_ip = value
+    
+    value = _get_value_with_field(info, para.LATITUDE)
+    if value != 0.0:
+        log_info.last_log_latitude = value
+    
+    value = _get_value_with_field(info, para.LONGITUDE)
+    if value != 0.0:
+        log_info.last_log_longitude = value
+    
     log_info.last_log_date = datetime.datetime.now()
-
+"""
+    device_id = StringField(max_length=50, required=True)
+    device_os = StringField(max_length=50, required=True)
+    device_token = StringField(max_length=50, required=True)
+    device_name = StringField(max_length=50, required=True)
+"""
+def _update_device_info(device_info, info):
+    value = _get_value_with_field(info, para.DEVICE_ID)
+    if value is not None:
+        device_info.device_id = value
+    
+    value = _get_value_with_field(info, para.DEVICE_OS)
+    if value is not None:
+        device_info.device_os = value
+    
+    value = _get_value_with_field(info, para.DEVICE_TOKEN)
+    if value is not None:
+        device_info.device_token = value
+    
+    value = _get_value_with_field(info, para.DEVICE_NAME)
+    if value is not None:
+        device_info.device_name = value
 
 def login(uname, password, **args):
     user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
     if user.log_info is None:
         user.log_info = Log()
     _update_log_info(user.log_info, args)
+
+    if user.device_info is None:
+        user.device_info = Device()
+    _update_device_info(user.device_info, args)
+
     user.save()
 
     return user
@@ -45,7 +79,7 @@ def get_user_by_uname(uname):
     except:
         return None
 
-def register(uname, password, **fields):
+def register(uname, password, **args):
     user = User()
     
     basic = UserBasic()
@@ -57,10 +91,18 @@ def register(uname, password, **fields):
     reg_info = Registration()
     reg_info.reg_date = datetime.datetime.now()
     reg_info.reg_type = PBUser.NICK
+    ip = _get_value_with_field(args, para.IP)
+
     user.reg_info = reg_info
-    
-    if para.IP in fields and fields[para.IP] is not None:
-        reg_info.reg_ip = fields[para.IP]
+     
+    if user.log_info is None:
+        user.log_info = Log()
+    _update_log_info(user.log_info, args)
+
+    if user.device_info is None:
+        user.device_info = Device()
+    _update_device_info(user.device_info, args)
+
     user.save()
     return user
 
@@ -109,6 +151,7 @@ def _add_user_with_sns(sns_type, sns_id, sns_token, sns_nick, ip):
     reg = Registration()
     reg.reg_date = datetime.datetime.now()
     reg.reg_type = sns_type
+    reg.reg_ip = ip
     
     user = User()
     user.basic_info = basic
@@ -122,18 +165,16 @@ def snslogin(sns_type, sns_id, sns_token, sns_nick, **args):
     user = get_user_with_sns(sns_type, sns_id)
 
     if user is None:
-        ip = None
-        if para.IP in args:
-            ip = args[para.IP]
+        ip = _get_value_with_field(args, para.IP) 
         user = _add_user_with_sns(sns_type, sns_id, sns_token, sns_nick, ip)
-
-    log.info("snslogin args = ")
-    log.info(args)
     
     if user.log_info is None:
         user.log_info = Log()
-    
     _update_log_info(user.log_info, args)
+
+    if user.device_info is None:
+        user.device_info = Device()
+    _update_device_info(user.device_info, args)
 
     user.save()
 

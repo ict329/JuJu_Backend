@@ -64,8 +64,8 @@ message PBRegistration
 
 
 message PBDevice{
-    required string device_id = 1;
-    required string device_os = 2;
+    optional string device_id = 1;
+    optional string device_os = 2;
     optional string device_token = 3; //for ios push
     optional string device_name = 4;
 }

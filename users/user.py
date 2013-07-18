@@ -73,10 +73,10 @@ class Statistic(EmbeddedDocument):
         update_pb_with_document(statistic, self, self.get_field_list())
 
 class Device(EmbeddedDocument):
-    device_id = StringField(max_length=50, required=True)
-    device_os = StringField(max_length=50, required=True)
-    device_token = StringField(max_length=50, required=True)
-    device_name = StringField(max_length=50, required=True)
+    device_id = StringField(max_length=50)
+    device_os = StringField(max_length=50)
+    device_token = StringField(max_length=50)
+    device_name = StringField(max_length=50)
     
     def get_field_list(self):
         return ('device_id', 'device_os', 'device_token', 'device_name')

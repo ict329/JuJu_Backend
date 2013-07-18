@@ -307,14 +307,14 @@ _PBDEVICE = descriptor.Descriptor(
   fields=[
     descriptor.FieldDescriptor(
       name='device_id', full_name='PBDevice.device_id', index=0,
-      number=1, type=9, cpp_type=9, label=2,
+      number=1, type=9, cpp_type=9, label=1,
       default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='device_os', full_name='PBDevice.device_os', index=1,
-      number=2, type=9, cpp_type=9, label=2,
+      number=2, type=9, cpp_type=9, label=1,
       default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
