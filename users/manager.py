@@ -6,10 +6,32 @@ import datetime
 import pbmodels.user_pb2 as PBUser 
 import constant.para as para
 from bson import ObjectId
+import logging
 
 
-def login(uname, password):
-    return User.objects.get(basic_info__uname = uname, basic_info__password = password)
+log = logging.getLogger('UserManager')
+
+def _update_log_info(log_info, info):
+    log.info("_update_log_info info = ")
+    log.info(info)
+    if para.IP in info:
+        log_info.last_log_ip = info[para.IP] 
+    if para.LATITUDE in info:
+        log_info.last_log_latitude = info[para.LATITUDE]
+    if para.LONGITUDE in info: 
+        log_info.last_log_longitude = info[para.LONGITUDE]
+
+    log_info.last_log_date = datetime.datetime.now()
+
+
+def login(uname, password, **args):
+    user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
+    if user.log_info is None:
+        user.log_info = Log()
+    _update_log_info(user.log_info, args)
+    user.save()
+
+    return user
 
 def get_user(uid):
     try:
@@ -37,8 +59,8 @@ def register(uname, password, **fields):
     reg_info.reg_type = PBUser.NICK
     user.reg_info = reg_info
     
-    if 'ip' in fields and fields['ip'] is not None:
-        reg_info.reg_ip = fields['ip']
+    if para.IP in fields and fields[para.IP] is not None:
+        reg_info.reg_ip = fields[para.IP]
     user.save()
     return user
 
@@ -92,17 +114,29 @@ def _add_user_with_sns(sns_type, sns_id, sns_token, sns_nick, ip):
     user.basic_info = basic
     user.reg_info = reg
     user.sns_info = sns
-    user.save()
+#    user.save()
     return user
 
 
 def snslogin(sns_type, sns_id, sns_token, sns_nick, **args):
     user = get_user_with_sns(sns_type, sns_id)
+
     if user is None:
         ip = None
-        if 'ip' in args:
-            ip = args['ip']
+        if para.IP in args:
+            ip = args[para.IP]
         user = _add_user_with_sns(sns_type, sns_id, sns_token, sns_nick, ip)
+
+    log.info("snslogin args = ")
+    log.info(args)
+    
+    if user.log_info is None:
+        user.log_info = Log()
+    
+    _update_log_info(user.log_info, args)
+
+    user.save()
+
     return user
 
 ##### TEST CODE BELOW ######

@@ -235,8 +235,8 @@ _PBLOG = descriptor.Descriptor(
       options=None),
     descriptor.FieldDescriptor(
       name='last_log_ip', full_name='PBLog.last_log_ip', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      default_value=0,
+      number=2, type=9, cpp_type=9, label=1,
+      default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),

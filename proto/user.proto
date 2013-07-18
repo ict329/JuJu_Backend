@@ -48,7 +48,7 @@ message PBSNS{
 
 message PBLog{
     optional int32 last_log_date = 1;
-    optional int32 last_log_ip = 2;
+    optional string last_log_ip = 2;
     optional float last_log_latitude = 3;
     optional float last_log_longitude = 4;
 }

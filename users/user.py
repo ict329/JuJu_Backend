@@ -50,7 +50,7 @@ class SNS(EmbeddedDocument):
 
 class Log(EmbeddedDocument):
     last_log_date = DateTimeField()
-    last_log_ip = IntField()
+    last_log_ip = StringField()
     last_log_latitude = FloatField()
     last_log_longitude = FloatField()
     

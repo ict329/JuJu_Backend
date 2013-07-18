@@ -21,6 +21,12 @@ class SNSLoginService(JJService):
         self.sns_token = request_util.get_value(self.request, para.SNS_TOKEN)
         self.sns_nick = request_util.get_value(self.request, para.SNS_NICK)
         
+        self.latitude = request_util.get_value(self.request, para.LATITUDE)
+        self.latitude = str_util.get_float_value(self.latitude)
+        self.longitude = request_util.get_value(self.request, para.LONGITUDE)
+        self.longitude = str_util.get_float_value(self.longitude)
+        self.ip = self.request.remote_addr
+        
     def _check_parameters(self):
         if not JJService._check_parameters(self):
             return False
@@ -33,8 +39,7 @@ class SNSLoginService(JJService):
 
     def _handle_data(self):
 #        try:
-        ip = self.request.remote_addr
-        user = user_manager.snslogin(self.sns_type, self.sns_id, self.sns_token, self.sns_nick, ip=ip)
+        user = user_manager.snslogin(self.sns_type, self.sns_id, self.sns_token, self.sns_nick,  ip=self.ip, latitude=self.latitude, longitude=self.longitude)
 #TODO set/update session
         pbuser = user.build_pb()
         return pbuser.SerializeToString()
