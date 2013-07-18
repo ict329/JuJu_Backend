@@ -4,6 +4,8 @@
 from pbmodels.response_pb2 import *
 from core.error import ERROR_DICT
 
+
+
 def get_error_response(code, error_message = None):
     response = PBResponse()
     response.code = code
@@ -16,3 +18,5 @@ def get_error_response(code, error_message = None):
         response.error_message = error_message
     return response
 
+
+SUCCESS_RESPONSE = get_error_response(SUCCESS)

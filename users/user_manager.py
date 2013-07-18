@@ -6,6 +6,10 @@ import datetime
 import pbmodels.user_pb2 as user_pb2
 import constant.para as para
 
+
+def login(uname, password):
+    return User.objects.get(basic_info__uname = uname, basic_info__password = password)
+
 def get_user(uid):
     try:
         return User.objects.get(pk=uid)

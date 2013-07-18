@@ -3,115 +3,90 @@
 from google.protobuf import descriptor
 from google.protobuf import message
 from google.protobuf import reflection
+from google.protobuf import service
+from google.protobuf import service_reflection
 from google.protobuf import descriptor_pb2
-# @@protoc_insertion_point(imports)
-
-
-
-DESCRIPTOR = descriptor.FileDescriptor(
-  name='basic.proto',
-  package='',
-  serialized_pb='\n\x0b\x62\x61sic.proto\"g\n\nPBLocation\x12\x14\n\x0c\x63ountry_code\x18\x01 \x02(\x05\x12\x10\n\x08province\x18\x02 \x02(\t\x12\x0c\n\x04\x63ity\x18\x03 \x02(\t\x12\x10\n\x08latitude\x18\x04 \x01(\x02\x12\x11\n\tlongitude\x18\x05 \x01(\x02\"\x1f\n\tPBContact\x12\x12\n\ntel_number\x18\x01 \x03(\t')
-
 
 
 
 _PBLOCATION = descriptor.Descriptor(
   name='PBLocation',
   full_name='PBLocation',
-  filename=None,
-  file=DESCRIPTOR,
+  filename='basic.proto',
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='country_code', full_name='PBLocation.country_code', index=0,
       number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='province', full_name='PBLocation.province', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='city', full_name='PBLocation.city', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='latitude', full_name='PBLocation.latitude', index=3,
       number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
+      default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='longitude', full_name='PBLocation.longitude', index=4,
       number=5, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
+      default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[],  # TODO(robinson): Implement.
   enum_types=[
   ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=15,
-  serialized_end=118,
-)
+  options=None)
 
 
 _PBCONTACT = descriptor.Descriptor(
   name='PBContact',
   full_name='PBContact',
-  filename=None,
-  file=DESCRIPTOR,
+  filename='basic.proto',
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='tel_number', full_name='PBContact.tel_number', index=0,
       number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[],  # TODO(robinson): Implement.
   enum_types=[
   ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=120,
-  serialized_end=151,
-)
+  options=None)
 
-DESCRIPTOR.message_types_by_name['PBLocation'] = _PBLOCATION
-DESCRIPTOR.message_types_by_name['PBContact'] = _PBCONTACT
+
 
 class PBLocation(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _PBLOCATION
-  
-  # @@protoc_insertion_point(class_scope:PBLocation)
 
 class PBContact(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _PBCONTACT
-  
-  # @@protoc_insertion_point(class_scope:PBContact)
 
-# @@protoc_insertion_point(module_scope)

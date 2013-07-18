@@ -6,7 +6,7 @@
 
 from flask import Blueprint
 from services import UserService
-from services import RegisterService
+from services import RegisterService, LoginService, LogoutService
 from models import UserBasic, User
 from pbmodels.user_pb2 import *
 from flask import session, request
@@ -17,6 +17,13 @@ bp = Blueprint('users', __name__, url_prefix='/api/users')
 def register():
     return RegisterService(request).handle()
 
+@bp.route('/login')
+def login():
+    return LoginService(request).handle()
+
+@bp.route('/logout')
+def logout():
+    return LogoutService(request).handle()
 
 #Below is test code 
 
