@@ -11,50 +11,32 @@ import logging
 
 log = logging.getLogger('UserManager')
 
+
+def _set_value(dist, attr, src, field, nil_value):
+    if src and field in src:
+        value = src[field]
+        if value != nil_value:
+            setattr(dist, attr, value)
+
 def _get_value_with_field(info, field):
     if field in info and info[field] is not None:
         return info[field]
     return None
 
 def _update_log_info(log_info, info):
-    value = _get_value_with_field(info, para.IP)
-    if value is not None:
-        log_info.last_log_ip = value
-    
-    value = _get_value_with_field(info, para.LATITUDE)
-    if value != 0.0:
-        log_info.last_log_latitude = value
-    
-    value = _get_value_with_field(info, para.LONGITUDE)
-    if value != 0.0:
-        log_info.last_log_longitude = value
-    
+    _set_value(log_info, 'last_log_ip', info, para.IP, None)
+    _set_value(log_info, 'last_log_latitude', info, para.LATITUDE, 0.0)
+    _set_value(log_info, 'last_log_longitude', info, para.LONGITUDE, 0.0)
     log_info.last_log_date = datetime.datetime.now()
-"""
-    device_id = StringField(max_length=50, required=True)
-    device_os = StringField(max_length=50, required=True)
-    device_token = StringField(max_length=50, required=True)
-    device_name = StringField(max_length=50, required=True)
-"""
-def _update_device_info(device_info, info):
-    value = _get_value_with_field(info, para.DEVICE_ID)
-    if value is not None:
-        device_info.device_id = value
-    
-    value = _get_value_with_field(info, para.DEVICE_OS)
-    if value is not None:
-        device_info.device_os = value
-    
-    value = _get_value_with_field(info, para.DEVICE_TOKEN)
-    if value is not None:
-        device_info.device_token = value
-    
-    value = _get_value_with_field(info, para.DEVICE_NAME)
-    if value is not None:
-        device_info.device_name = value
 
-def login(uname, password, **args):
-    user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
+
+def _update_device_info(device_info, info):
+    _set_value(device_info, 'device_id', info, para.DEVICE_ID, None)
+    _set_value(device_info, 'device_os', info, para.DEVICE_OS, None)
+    _set_value(device_info, 'device_name', info, para.DEVICE_NAME, None)
+    _set_value(device_info, 'device_token', info, para.DEVICE_TOKEN, None)
+      
+def _update_user_device_log_info(user, args):
     if user.log_info is None:
         user.log_info = Log()
     _update_log_info(user.log_info, args)
@@ -63,8 +45,12 @@ def login(uname, password, **args):
         user.device_info = Device()
     _update_device_info(user.device_info, args)
 
-    user.save()
 
+
+def login(uname, password, **args):
+    user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
+    _update_user_device_log_info(user, args)
+    user.save()
     return user
 
 def get_user(uid):
@@ -89,19 +75,13 @@ def register(uname, password, **args):
     user.basic_info = basic
 
     reg_info = Registration()
+    user.reg_info = reg_info
+    
     reg_info.reg_date = datetime.datetime.now()
     reg_info.reg_type = PBUser.NICK
-    ip = _get_value_with_field(args, para.IP)
+    _set_value(reg_info, 'reg_ip', args, para.IP, None)
 
-    user.reg_info = reg_info
-     
-    if user.log_info is None:
-        user.log_info = Log()
-    _update_log_info(user.log_info, args)
-
-    if user.device_info is None:
-        user.device_info = Device()
-    _update_device_info(user.device_info, args)
+    _update_user_device_log_info(user, args)
 
     user.save()
     return user
@@ -167,14 +147,8 @@ def snslogin(sns_type, sns_id, sns_token, sns_nick, **args):
     if user is None:
         ip = _get_value_with_field(args, para.IP) 
         user = _add_user_with_sns(sns_type, sns_id, sns_token, sns_nick, ip)
-    
-    if user.log_info is None:
-        user.log_info = Log()
-    _update_log_info(user.log_info, args)
-
-    if user.device_info is None:
-        user.device_info = Device()
-    _update_device_info(user.device_info, args)
+   
+    _update_user_device_log_info(user, args)
 
     user.save()
 
