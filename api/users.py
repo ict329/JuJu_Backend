@@ -7,9 +7,10 @@
 from flask import Blueprint
 from services import UserService
 from services import RegisterService, LoginService, LogoutService, SNSLoginService
-from models import UserBasic, User
+from models import *
 from pbmodels.user_pb2 import *
 from flask import session, request
+from common.utils.upload_util import *
 
 bp = Blueprint('users', __name__, url_prefix='/api/users')
 
@@ -28,6 +29,22 @@ def logout():
 @bp.route('/snslogin')
 def snslogin():
     return SNSLoginService(request).handle()
+
+@bp.route('/upload', methods=['GET','POST'])
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        return upload_file(file, 'upload')
+    
+    return  """
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+           <input type=submit value=Upload>
+     </form>
+     """
 
 #Below is test code 
 
