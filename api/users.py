@@ -48,25 +48,21 @@ def upload():
 
 #Below is test code 
 
-
 @bp.route('/add')
 def add_user():
     pb_user = PBUser()
-    pb_user.basic_info.uname = 'kaibin'
-    pb_user.basic_info.uid = '1'
-    pb_user.basic_info.nick = 'kaibin'
+    pb_user.basic_info.uname = 'kk'
+    pb_user.basic_info.nick = 'kk'
     print pb_user
 
     user = User()
     basic_info = UserBasic()
-    basic_info.uid = pb_user.basic_info.uid
     basic_info.uname = pb_user.basic_info.uname
     basic_info.nick = pb_user.basic_info.nick
 
     user.basic_info = basic_info
     userService = UserService()
     userService.save(user)
-    return ''
 
 @bp.route('/list')
 def list_user():
@@ -81,16 +77,31 @@ def count_user():
     count = users.count()
     return str(count)
 
+
 @bp.route('/update')
 def update_user():
     return ''
 
 @bp.route("/set")
 def set_session():
-    session['data'] = request.args['user']
-    return session['data']
-
+    session['uid'] = request.args.get('uid')
+    session['name'] = request.args.get('name')
+    return session['uid']
 
 @bp.route("/get")
 def get_session():
-    return session.get('data', '')
+    if 'uid' in session:
+        print session.get('uid')
+    return session.get('uid', '')
+
+@bp.route("/remove")
+def remove_session():
+    if 'uid' in session:
+        session.pop('uid',None)
+    return ''
+
+@bp.route("/delete")
+def delete_session():
+    if 'uid' in session:
+        session.clear()
+    return ''
