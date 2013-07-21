@@ -4,7 +4,7 @@ import common.utils.request_util
 import logging
 
 
-from flask import request
+from flask import request, session
 from pbmodels.response_pb2 import *
 from common.utils.response_util import *
 
@@ -34,8 +34,7 @@ class JJService(object):
         self.code = 0
         self.data = None
         self.request = request
-
-    
+        self.session = session
 
     #protected methods, to be override
     def _parse_request(self):
@@ -58,6 +57,8 @@ class JJService(object):
     def handle(self):
 #        try:
             self._parse_request()
+            print self.session['uid']
+            return '****' + self.session['uid']
 
             if not self._check_parameters():
                 self.code = PARAMETER_ERROR 

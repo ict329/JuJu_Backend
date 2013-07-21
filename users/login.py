@@ -11,8 +11,7 @@ from pbmodels.response_pb2 import *
 
 class LoginService(JJService):
     def __init__(self, request):
-        self.code = 0
-        self.request = request
+        JJService.__init__(self, request)
    
     def _parse_request(self):
         self.uname = request_util.get_value(self.request, para.UNAME)
