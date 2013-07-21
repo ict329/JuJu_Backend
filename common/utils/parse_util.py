@@ -14,7 +14,6 @@ def update_pb_with_list(pbmodel, field, lst):
         if hasattr(pbmodel, field):
             value = getattr(pbmodel, field)
             if value is not None:
-                print 'extend!!!'
                 value.extend(lst)
         
     

@@ -23,5 +23,5 @@ class LogoutService(JJService):
         return True
 
     def _handle_data(self):
-        return response_util.SUCCESS_RESPONSE.SerializeToString() 
-#TODO delete user session
+        self.session.clear()
+        return response_util.SUCCESS_RESPONSE.SerializeToString()

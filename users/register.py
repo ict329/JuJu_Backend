@@ -7,9 +7,11 @@ import logging
 from core.service import JJService
 
 from users.user import User
+from pbmodels.response_pb2 import *
 
 import users.manager as user_manager
-import common.utils.request_util as request_util 
+import common.utils.request_util as request_util
+import common.utils.str_util as str_util
 import constant.para as para
 
 class RegisterService(JJService):
@@ -56,10 +58,12 @@ class RegisterService(JJService):
                 ip=self.ip, latitude=self.latitude, longitude=self.longitude, \
                 device_id=self.device_id, device_name=self.device_name, 
                 device_os=self.device_os, device_token=self.device_token)
+        self.session['uid'] = str(user.pk)
+        rep = PBResponse()
+        rep.code = SUCCESS
+        user.update_pb(rep.user)
+        return rep.SerializeToString()
 
-        pbuser = user.build_pb()
-        return pbuser.SerializeToString()
-        
     def _handle_error(self):
         return JJService._handle_error(self)
 
