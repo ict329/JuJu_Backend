@@ -19,6 +19,10 @@ def register_all_blueprints(app):
     """
     register_blueprints(app, api.__name__, api.__path__)
 
+@app.route("/favicon.ico")
+def favicon():
+    return ''
+
 app = create_app()
 register_all_blueprints(app)
 connect(MONGO_CONFIG['DB'], host = MONGO_CONFIG['HOST'], port = MONGO_CONFIG['PORT'])
