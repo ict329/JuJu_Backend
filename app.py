@@ -5,12 +5,12 @@ from helpers import register_blueprints
 import api
 from mongoengine import connect
 from settings import * 
-#from core.session import RedisSessionInterface
+from core.session import RedisSessionInterface
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
-#    app.session_interface = RedisSessionInterface()
+    app.session_interface = RedisSessionInterface()
     return app
 
 def register_all_blueprints(app):
@@ -19,16 +19,13 @@ def register_all_blueprints(app):
     """
     register_blueprints(app, api.__name__, api.__path__)
 
-@app.route("/favicon.ico")
-def favicon():
-    return ''
-
 app = create_app()
 register_all_blueprints(app)
 connect(DATABASE, host = MONGO_HOST, port = MONGO_PORT)
 
-#App Settings
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+@app.route("/favicon.ico")
+def favicon():
+    return ''
 
 if __name__ == '__main__':
     app.run()
