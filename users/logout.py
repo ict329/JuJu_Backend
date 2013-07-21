@@ -7,8 +7,7 @@ import common.utils.response_util as response_util
 
 class LogoutService(JJService):
     def __init__(self, request):
-        self.code = 0
-        self.request = request
+        JJService.__init__(self, request)
    
     def _parse_request(self):
         pass

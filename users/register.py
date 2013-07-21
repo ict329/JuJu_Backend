@@ -17,7 +17,7 @@ class RegisterService(JJService):
     log = logging.getLogger('RegisterService')
 
     def __init__(self, request):
-        self.request = request
+        JJService.__init__(self, request)
 
 
     #protected methods, to be override
