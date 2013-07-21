@@ -13,15 +13,19 @@ log = logging.getLogger('UserManager')
 
 
 def _set_value(dist, attr, src, field, nil_value):
-    if src and field in src:
+    try: 
         value = src[field]
         if value != nil_value:
             setattr(dist, attr, value)
+    except:
+        pass
 
 def _get_value_with_field(info, field):
-    if field in info and info[field] is not None:
+    try:
         return info[field]
-    return None
+    except Exception, e:
+        log.info("_get_value_with_field exception: " + e)
+        return None
 
 def _update_log_info(log_info, info):
     _set_value(log_info, 'last_log_ip', info, para.IP, None)
