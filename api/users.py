@@ -7,7 +7,7 @@
 from flask import Blueprint
 from services import UserService
 from services import RegisterService, LoginService, LogoutService, SNSLoginService
-from models import UserBasic, User
+from models import *
 from pbmodels.user_pb2 import *
 from flask import session, request
 from common.utils.upload_util import *
