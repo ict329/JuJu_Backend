@@ -57,8 +57,6 @@ class JJService(object):
     def handle(self):
 #        try:
             self._parse_request()
-            print self.session['uid']
-            return '****' + self.session['uid']
 
             if not self._check_parameters():
                 self.code = PARAMETER_ERROR 

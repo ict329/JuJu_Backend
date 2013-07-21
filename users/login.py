@@ -47,6 +47,7 @@ class LoginService(JJService):
                     device_os=self.device_os, device_token=self.device_token)
 
 #TODO set/update session
+            self.session['uid'] = str(user.pk)
             pbuser = user.build_pb()
             return pbuser.SerializeToString()
         except:
