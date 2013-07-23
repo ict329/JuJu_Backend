@@ -1,13 +1,14 @@
 from flask import request
 from core.service import JJService
+import constant.para as para
 
 class UpdateProfileService(JJService):
     def __init__(self, request):
-        self.code = 0
-        self.data = None
-        self.request = request
+        JJService.__init__(self, request)
    
     def _parse_request(self):
+        self.avatar = para.AVATAR
+
         pass 
         
     def _check_parameters(self):

@@ -27,5 +27,9 @@ connect(DATABASE, host = MONGO_HOST, port = MONGO_PORT)
 def favicon():
     return ''
 
+@app.route("/test")
+def test():
+    return 'Hello World!'
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8080)

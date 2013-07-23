@@ -31,7 +31,7 @@ def _update_log_info(log_info, info):
     _set_value(log_info, 'last_log_ip', info, para.IP, None)
     _set_value(log_info, 'last_log_latitude', info, para.LATITUDE, 0.0)
     _set_value(log_info, 'last_log_longitude', info, para.LONGITUDE, 0.0)
-    log_info.last_log_date = datetime.datetime.now()
+    log_info.last_log_date = datetime.datetime.utcnow()
 
 
 def _update_device_info(device_info, info):
@@ -54,7 +54,7 @@ def _update_user_device_log_info(user, args):
 def login(uname, password, **args):
     user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
     _update_user_device_log_info(user, args)
-    user.save()
+    user.update()
     return user
 
 def get_user(uid):
@@ -66,6 +66,12 @@ def get_user(uid):
 def get_user_by_uname(uname):
     try:
         return User.objects.get(basic_info__uname = uname)
+    except:
+        return None
+
+def get_users(uids):
+    try:
+        return User.objects(pk__in=uids)
     except:
         return None
 
@@ -81,7 +87,7 @@ def register(uname, password, **args):
     reg_info = Registration()
     user.reg_info = reg_info
     
-    reg_info.reg_date = datetime.datetime.now()
+    reg_info.reg_date = datetime.datetime.utcnow()
     reg_info.reg_type = PBUser.NICK
     _set_value(reg_info, 'reg_ip', args, para.IP, None)
 
@@ -133,7 +139,7 @@ def _add_user_with_sns(sns_type, sns_id, sns_token, sns_nick, ip):
 # set reg info
 
     reg = Registration()
-    reg.reg_date = datetime.datetime.now()
+    reg.reg_date = datetime.datetime.utcnow()
     reg.reg_type = sns_type
     reg.reg_ip = ip
     
@@ -158,6 +164,22 @@ def snslogin(sns_type, sns_id, sns_token, sns_nick, **args):
 
     return user
 
+#all the kv must in statistic
+def inc(uid, kv, min_value = 0):
+    try:
+        user = get_user(uid)
+        stat = user.statistic
+
+        for k,v in kv:
+            origin = 0
+            if hasattr(stat, k):
+                origin = getattr(stat, k)
+            setattr(stat, k, max(origin + v, min_value))
+
+        user.update()
+    except:
+        pass
+    
 ##### TEST CODE BELOW ######
 
     def __init__(self, uname, password):

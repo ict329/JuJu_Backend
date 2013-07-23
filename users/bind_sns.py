@@ -3,9 +3,7 @@ from core.service import JJService
 
 class BindSNSService(JJService):
     def __init__(self, request):
-        self.code = 0
-        self.data = None
-        self.request = request
+        JJService.__init__(self, request)
    
     def _parse_request(self):
         pass 

@@ -66,8 +66,17 @@ class Statistic(EmbeddedDocument):
     follow_count = IntField()
     my_activity = IntField()
     
+    new_fan_count = IntField()
+    new_follow_count = IntField()
+    new_message_count = IntField()
+    new_feed_count= IntField()
+    new_notice_count= IntField()
+
     def get_field_list(self):
-        return ('my_activity', 'fan_count', 'follow_count')
+        return ('my_activity', 'fan_count', 'follow_count', \
+                'new_fan_count', 'new_follow_count', \
+                'new_message_count', 'new_feed_count', \
+                'new_notice_count')
 
     def update_pb(self, statistic):
         update_pb_with_document(statistic, self, self.get_field_list())

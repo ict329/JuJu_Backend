@@ -3,11 +3,23 @@
 """
     Relation related api
 """
-from flask import Blueprint
-
+from flask import Blueprint, request
+from services import *
 
 bp = Blueprint('relations', __name__, url_prefix='/api/relations')
 
-@bp.route('/get')
-def get_relation():
-    pass
+@bp.route('/follow')
+def follow():
+    return FollowUserService(request).handle()
+
+@bp.route('/unfollow')
+def unfollow():
+    return UnfollowUserService(request).handle()
+
+@bp.route('/black')
+def black():
+    return BlackUserService(request).handle()
+
+@bp.route('/mark')
+def mark():
+    return MarkFriendService(request).handle()

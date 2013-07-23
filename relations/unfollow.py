@@ -1,17 +1,22 @@
 from flask import request
 from core.service import JJService
+import common.utils.request_util as request_util
+import common.utils.str_util as str_util 
+import common.utils.response_util as response_util
+import relations.manager as relation_manager
 
 class UnfollowUserService(JJService):
     def __init__(self, request):
-        self.code = 0
-        self.data = None
-        self.request = request
+        JJService.__init__(self, request)
    
     def _parse_request(self):
-        pass 
+        self.uid = request_util.get_value(self.request, 'uid')
+        self.fid = request_util.get_value(self.request, 'fid')
         
     def _check_parameters(self):
         if not JJService._check_parameters(self):
+            return False
+        if str_util.is_empty(self.uid) or str_util.is_empty(self.fid):
             return False
         return True
 
@@ -21,7 +26,5 @@ class UnfollowUserService(JJService):
         return True
 
     def _handle_data(self):
-        return self.__class__.__name__ 
-
-    def _handle_error(self):
-        return self.__class__.__name__ 
+        relation_manager.unfollow(self.uid, self.fid)    
+        return response_util.SUCCESS_RESPONSE.SerializeToString()
