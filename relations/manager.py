@@ -36,7 +36,7 @@ def black(uid, fid):
         user_manager.inc(fid, {'fan_count':-1, 'new_fan_count':-1})
     relation.relation = BLACK
     relation.c_date = datetime.datetime.utcnow()
-    relation.update()
+    relation.save()
 
 def unfollow(uid, fid):
     _set_relation(uid, fid, STRANGE)

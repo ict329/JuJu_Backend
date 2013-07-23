@@ -54,7 +54,7 @@ def _update_user_device_log_info(user, args):
 def login(uname, password, **args):
     user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
     _update_user_device_log_info(user, args)
-    user.update()
+    user.save()
     return user
 
 def get_user(uid):
@@ -166,19 +166,19 @@ def snslogin(sns_type, sns_id, sns_token, sns_nick, **args):
 
 #all the kv must in statistic
 def inc(uid, kv, min_value = 0):
-    try:
-        user = get_user(uid)
-        stat = user.statistic
+    user = get_user(uid)
+    if user.statistic is None:
+        user.statistic = Statistic()
+    stat = user.statistic
 
-        for k,v in kv:
-            origin = 0
-            if hasattr(stat, k):
-                origin = getattr(stat, k)
-            setattr(stat, k, max(origin + v, min_value))
-
-        user.update()
-    except:
-        pass
+    for k,v in kv.items():
+        origin = 0
+        if hasattr(stat, k):
+            origin = getattr(stat, k)
+            if not origin:
+                origin = 0
+        setattr(stat, k, max(origin + v, min_value))
+    user.save()
     
 ##### TEST CODE BELOW ######
 
