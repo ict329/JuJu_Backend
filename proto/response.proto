@@ -35,7 +35,7 @@ message PBResponse
     
     repeated PBAction actions = 10;
     repeated PBMessage messages = 11;
-    repeated PBUserBasic users = 12;
+    repeated PBUser users = 12;
     repeated PBActivity activitys = 13;
     repeated PBComment comments = 14;
 

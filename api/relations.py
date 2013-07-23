@@ -23,3 +23,11 @@ def black():
 @bp.route('/mark')
 def mark():
     return MarkFriendService(request).handle()
+
+@bp.route('/getfans')
+def getfans():
+    return GetFansService(request).handle()
+
+@bp.route('/getfollows')
+def getfollows():
+    return GetFollowsService(request).handle()

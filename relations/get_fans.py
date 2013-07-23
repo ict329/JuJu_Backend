@@ -6,7 +6,7 @@ import common.utils.response_util as response_util
 import relations.manager as relation_manager
 from pbmodels.response_pb2 import *
 
-class GetFollowsService(JJService):
+class GetFansService(JJService):
     def __init__(self, request):
         JJService.__init__(self, request)
    
@@ -33,7 +33,7 @@ class GetFollowsService(JJService):
         return True
 
     def _handle_data(self):
-        users = relation_manager.get_follow_list(self.uid, self.offset, self.count)
+        users = relation_manager.get_fan_list(self.uid, self.offset, self.count)
         if len(users) > 0:
             list = [user.build_pb() for user in users]
             res = PBResponse()

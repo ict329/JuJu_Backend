@@ -6,6 +6,9 @@ from pbmodels.user_pb2 import *
 from bson.objectid import ObjectId
 import users.manager as user_manager
 import datetime
+import logging
+
+log=logging.getLogger('RelationManager')
 
 
 def _get_relation(uid, fid):
@@ -49,52 +52,78 @@ def mark_friend(uid, fid, mark):
 def relation_between(uid1, uid2):
     return _get_relation(uid1, uid2) | _get_relation(uid2,uid1)
 
-def _c_date(c_date):
-    if not c_date:
-        c_date = datetime.datetime.utcnow()
-    return c_date
-
-def _get_follow_relation_list(uid, c_date, count):
+def _get_follow_relation_list(uid, offset, count):
+    uid = ObjectId(uid)
     try:
-        return Relation.objects(uid=uid, relation=FOLLOW, c_date__lt=_c_date(c_date)).order_by('-c_date')[0:count]
+        relations = Relation.objects(uid=uid, relation=FOLLOW).order_by('-_id')[offset:count]
+        log.info('get follow relation len = %d', (len(relations)))
+        log.info(relations)
+        return relations
     except:
-        return Relation.objects(uid=uid, relation=FOLLOW, c_date__lt=_c_date(c_date)).order_by('-c_date')
+        relations = Relation.objects(uid=uid, relation=FOLLOW).order_by('-_id')
+        log.info('get follow except: relation len = %d', (len(relations)))
+        log.info(relations)
+        return relations
 
-def _get_fan_relation_list(uid, c_date, count):
+def _get_fan_relation_list(uid, offset, count):
+    uid = ObjectId(uid)
     try:
-        return Relation.objects(fid=uid, relation=FOLLOW, c_date__lt=_c_date(c_date)).order_by('-c_date')[0:count]
+        relations = Relation.objects(fid=uid, relation=FOLLOW).order_by('-_id')[offset:count]
+        log.info('get fans relation len = %d', (len(relations)))
+        log.info(relations)
+        return relations
     except:
-        return Relation.objects(fid=uid, relation=FOLLOW, c_date__lt=_c_date(c_date)).order_by('-c_date')
+        relations = Relation.objects(fid=uid, relation=FOLLOW).order_by('-_id')
+        log.info('get fans except: relation len = %d', (len(relations)))
+        log.info(relations)
+        return relations
 
-def _get_black_relation_list(uid, c_date, count):
+def _get_black_relation_list(uid, offset, count):
+    uid = ObjectId(uid)
     try:
-        return Relation.objects(uid=uid, relation=BLACK, c_date__lt=_c_date(c_date)).order_by('-c_date')[0:count]
+        return Relation.objects(uid=uid, relation=BLACK).order_by('-_id')[offset:count]
     except:
-        return Relation.objects(uid=uid, relation=BLACK, c_date__lt=_c_date(c_date)).order_by('-c_date')
+        return Relation.objects(uid=uid, relation=BLACK).order_by('-_id')
     
 ########
 
-def _get_users_from_relations(relations):
-    uids = [user.pk for user in relations]
+def _get_follows_from_relations(relations):
+    uids = [relation.fid for relation in relations]
     users = user_manager.get_users(uids)
     kv = {}
     for relation in relations:
-        kv[relation.pk] = relation
+        kv[relation.fid] = relation
     for user in users:
-        relation = kv[relation.pk]
+        relation = kv[relation.fid]
         user.basic_info.mark = relation.mark
+        user.reg_info = None
+        user.log_info = None
     return users
-    
 
-def get_follow_list(uid, c_date, count):
-    relations = _get_follow_relation_list(uid, c_date, count)
-    return _get_users_from_relations(relations)
+def _get_fans_from_relations(relations):
+    uids = [relation.uid for relation in relations]
+    users = user_manager.get_users(uids)
+    kv = {}
+    for relation in relations:
+        kv[relation.uid] = relation
+    for user in users:
+        relation = kv[relation.uid]
+        user.basic_info.mark = relation.mark
+        user.reg_info = None
+        user.log_info = None
+    return users
+ 
 
-def get_fan_list(uid, c_date, count):
-    relations = _get_fan_relation_list(uid, c_date, count)
-    return _get_users_from_relations(relations)
+def get_follow_list(uid, offset, count):
+    relations = _get_follow_relation_list(uid, offset, count)
+    return _get_follows_from_relations(relations)
 
-def get_black_list(uid, c_date, count):
-    relations = _get_black_relation_list(uid, c_date, count)
-    return _get_users_from_relations(relations)
+def get_fan_list(uid, offset, count):
+    log.info('uid = %s, offset = %d, count = %d' % (uid, offset, count))
+    relations = _get_fan_relation_list(uid, offset, count)
+    return _get_follows_from_relations(relations)
+
+def get_black_list(uid, offset, count):
+    relations = _get_black_relation_list(uid, offset, count)
+    return _get_follows_from_relations(relations)
 

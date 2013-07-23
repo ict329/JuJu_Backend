@@ -10,3 +10,4 @@ class Relation(Document):
     relation = IntField(required = True)
     c_date = DateTimeField()
     mark = StringField(max_length = 50)
+

@@ -70,10 +70,14 @@ def get_user_by_uname(uname):
         return None
 
 def get_users(uids):
-    try:
-        return User.objects(pk__in=uids)
-    except:
-        return None
+#    try:
+    for uid in uids:
+        log.info('uid = %s, type = %s' % (uid, type(uid)))
+    users = User.objects(pk__in=uids)
+    log.info('users length = %d' % (len(users)))
+    return users
+#    except:
+    return None
 
 def register(uname, password, **args):
     user = User()

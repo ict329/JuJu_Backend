@@ -23,9 +23,9 @@ from actions.get_comments import GetCommentsService
 from actions.get_timeline import GetTimelineService
 from actions.share_action import ShareActionService
 
-from relations.black_user import BlackUserService
 from relations.follow import FollowUserService
-from relations.get_follows import GetFollowsService
-from relations.get_follows import GetFollowsService
-from relations.mark_friend import MarkFriendService
 from relations.unfollow import UnfollowUserService
+from relations.black_user import BlackUserService
+from relations.mark_friend import MarkFriendService
+from relations.get_follows import GetFollowsService
+from relations.get_fans import GetFansService
