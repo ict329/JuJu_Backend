@@ -13,6 +13,8 @@ import users.manager as user_manager
 import common.utils.request_util as request_util
 import common.utils.str_util as str_util
 import constant.para as para
+import mongoengine
+import common.utils.response_util as response_util
 
 class RegisterService(JJService):
 
@@ -52,17 +54,23 @@ class RegisterService(JJService):
         return True
 
     def _handle_data(self):
-#TODO try to catch the exception and return the error response
-
-        user = user_manager.register(self.uname, self.password, \
-                ip=self.ip, latitude=self.latitude, longitude=self.longitude, \
-                device_id=self.device_id, device_name=self.device_name, 
-                device_os=self.device_os, device_token=self.device_token)
-        self.session['uid'] = str(user.pk)
         rep = PBResponse()
-        rep.code = SUCCESS
-        user.update_pb(rep.user)
+        try:
+            user = user_manager.register(self.uname, self.password, \
+                    ip=self.ip, latitude=self.latitude, longitude=self.longitude, \
+                    device_id=self.device_id, device_name=self.device_name, 
+                    device_os=self.device_os, device_token=self.device_token)
+            self.session['uid'] = str(user.pk)
+            rep.code = response_util.SUCCESS
+            user.update_pb(rep.user)
+        except mongoengine.NotUniqueError, e:
+            rep = response_util.get_error_response(UNAME_EXISTS_ERROR)
+        except:
+            rep = response_util.UNKNOW_ERROR_RESPONSE
+
         return rep.SerializeToString()
+
+            
 
     def _handle_error(self):
         return JJService._handle_error(self)

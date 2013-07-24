@@ -60,11 +60,15 @@ _PBRESULTCODE = descriptor.EnumDescriptor(
       options=None,
       type=None),
     descriptor.EnumValueDescriptor(
-      name='ACTION_NOT_EXISTS_ERROR', index=12, number=20001,
+      name='UNAME_EXISTS_ERROR', index=12, number=10001,
       options=None,
       type=None),
     descriptor.EnumValueDescriptor(
-      name='ACTION_STATUS_EXCEPTION_ERROR', index=13, number=20002,
+      name='ACTION_NOT_EXISTS_ERROR', index=13, number=20001,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='ACTION_STATUS_EXCEPTION_ERROR', index=14, number=20002,
       options=None,
       type=None),
   ],
@@ -84,6 +88,7 @@ UNLOGIN_ERROR = 7
 USER_NOT_EXISTS_ERROR = 10001
 PASSWORD_INCORRECT_ERROR = 10002
 USER_STATUS_EXCEPTION_ERROR = 10003
+UNAME_EXISTS_ERROR = 10001
 ACTION_NOT_EXISTS_ERROR = 20001
 ACTION_STATUS_EXCEPTION_ERROR = 20002
 

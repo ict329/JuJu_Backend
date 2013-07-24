@@ -13,12 +13,14 @@ ERROR_DICT = {
     AUTH_ERROR : 'Pivilege not enough!',
     NETWORK_ERROR : 'Network error!',
     TIMEOUT_ERROR : 'Timeout!',
+    UNLOGIN_ERROR : 'Unlogin!',
 
 #User error code: from 10000 to 19999
 
     USER_NOT_EXISTS_ERROR : 'User not exists!',
     PASSWORD_INCORRECT_ERROR : 'Password is incorrect!',
     USER_STATUS_EXCEPTION_ERROR : 'User status is exception!',
+    UNAME_EXISTS_ERROR: 'User name exists!',
 
 #Action error code: from 20000 to 29999
 

@@ -7,6 +7,7 @@ from flask import request
 from core.service import JJService
 from users.user import User
 from pbmodels.response_pb2 import *
+from common.utils.response_util import *
 
 
 class LoginService(JJService):
@@ -48,8 +49,9 @@ class LoginService(JJService):
 
 #TODO set/update session
             self.session['uid'] = str(user.pk)
-            pbuser = user.build_pb()
-            return pbuser.SerializeToString()
+            res = SUCCESS_RESPONSE
+            user.update_pb(res.user)
+            return res.SerializeToString()
         except:
             self.code = USER_NOT_EXISTS_ERROR
             return JJService._handle_error(self)
