@@ -13,6 +13,7 @@ enum PBResultCode{
     AUTH_ERROR = 4;
     NETWORK_ERROR = 5;
     TIMEOUT_ERROR = 6;
+    UNLOGIN_ERROR = 7;
 
 // User error code: from 10000 to 19999
 
