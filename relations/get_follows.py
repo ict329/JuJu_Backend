@@ -5,7 +5,11 @@ import common.utils.str_util as str_util
 import common.utils.response_util as response_util
 import relations.manager as relation_manager
 from pbmodels.response_pb2 import *
+from pbmodels.user_pb2 import *
+import logging
 
+
+log=logging.getLogger('GetFollowsService')
 class GetFollowsService(JJService):
     def __init__(self, request):
         JJService.__init__(self, request)
@@ -35,10 +39,8 @@ class GetFollowsService(JJService):
     def _handle_data(self):
         users = relation_manager.get_follow_list(self.uid, self.offset, self.count)
         if len(users) > 0:
-            list = [user.build_pb() for user in users]
             res = PBResponse()
-            res.code = SUCCESS
-            res.users.extend(list)
+            response_util.update_users(res, users)
             return res.SerializeToString()
         else:
             return response_util.SUCCESS_RESPONSE.SerializeToString()

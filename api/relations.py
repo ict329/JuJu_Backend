@@ -20,6 +20,10 @@ def unfollow():
 def black():
     return BlackUserService(request).handle()
 
+@bp.route('/unblack')
+def unblack():
+    return UnblackUserService(request).handle()
+
 @bp.route('/mark')
 def mark():
     return MarkFriendService(request).handle()

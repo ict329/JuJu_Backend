@@ -17,7 +17,7 @@ def _get_relation(uid, fid):
     try:
         return Relation.objects.get(uid=uid, fid=fid)
     except:
-        return STRANGE 
+        return None
 
 def _set_relation(uid, fid, relation):
     uid = ObjectId(uid)
@@ -27,30 +27,42 @@ def _set_relation(uid, fid, relation):
     
 
 def follow(uid, fid):
-    _set_relation(uid, fid, FOLLOW) 
-    user_manager.inc(uid, {'follow_count':1})
-    user_manager.inc(fid, {'fan_count':1, 'new_fan_count':1})
+    relation = _get_relation(uid, fid)
+    if not relation or relation.relation != FOLLOW:
+        _set_relation(uid, fid, FOLLOW) 
+        user_manager.inc(uid, {'follow_count':1})
+        user_manager.inc(fid, {'fan_count':1, 'new_fan_count':1})
 
 
 def black(uid, fid):
     relation = _get_relation(uid, fid)
     if relation.relation == FOLLOW:
         user_manager.inc(uid, {'follow_count': -1})
-        user_manager.inc(fid, {'fan_count':-1, 'new_fan_count':-1})
+        user_manager.inc(fid, {'fan_count':-1})
     relation.relation = BLACK
     relation.c_date = datetime.datetime.utcnow()
     relation.save()
 
 def unfollow(uid, fid):
-    _set_relation(uid, fid, STRANGE)
-    user_manager.inc(uid, {'follow_count': -1})
-    user_manager.inc(fid, {'fan_count':-1, 'new_fan_count':-1})
+    relation = _get_relation(uid, fid)
+    if relation and relation.relation == FOLLOW:
+        _set_relation(uid, fid, STRANGE)
+        user_manager.inc(uid, {'follow_count': -1})
+        user_manager.inc(fid, {'fan_count':-1})
+
+def unblack(uid, fid):
+    relation = _get_relation(uid, fid)
+    if relation and relation.relation == BLACK:
+        _set_relation(uid, fid, STRANGE)
 
 def mark_friend(uid, fid, mark):
     Relation.objects(uid=uid, fid=fid).update_one(set__mark=mark)
 
 def relation_between(uid1, uid2):
-    return _get_relation(uid1, uid2) | _get_relation(uid2,uid1)
+    r1 = _get_relation(uid1, uid2)
+    r2 = _get_relation(uid2, uid1)
+    f = lambda x: [STRANGE, x.relation][x is None]
+    return f(r1) | f(r2)
 
 def _get_follow_relation_list(uid, offset, count):
     uid = ObjectId(uid)
@@ -88,11 +100,12 @@ def _get_black_relation_list(uid, offset, count):
 ########
 
 def _get_follows_from_relations(relations):
+    if not relations or len(relations) == 0:
+        log.info('relations is empty')
+        return []
     uids = [relation.fid for relation in relations]
     users = user_manager.get_users(uids)
-    kv = {}
-    for relation in relations:
-        kv[relation.fid] = relation
+    kv = {relation.fid : relation for relation in relations}
     for user in users:
         relation = kv[relation.fid]
         user.basic_info.mark = relation.mark
@@ -101,11 +114,12 @@ def _get_follows_from_relations(relations):
     return users
 
 def _get_fans_from_relations(relations):
+    if not relations or len(relations) == 0:
+        log.info('relations is empty')
+        return [] 
     uids = [relation.uid for relation in relations]
     users = user_manager.get_users(uids)
-    kv = {}
-    for relation in relations:
-        kv[relation.uid] = relation
+    kv = {relation.uid : relation for relation in relations}
     for user in users:
         relation = kv[relation.uid]
         user.basic_info.mark = relation.mark

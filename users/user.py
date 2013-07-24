@@ -21,7 +21,7 @@ class UserBasic(EmbeddedDocument):
     tags = ListField(StringField())
 
     def get_field_list(self):
-        return ('uname', 'nick', 'role', 'gender', 'avatar', 'status','introduction')
+        return ('uname', 'nick', 'role', 'gender', 'avatar', 'status','introduction','mark','relation')
 
     def update_pb(self, basic_info):
         update_pb_with_document(basic_info, self, self.get_field_list())

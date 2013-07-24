@@ -102,7 +102,7 @@ message PBUserBasic{
 
     //for return not for store
     optional PBRelation relation = 20;
-    optional string note_name = 21;
+    optional string mark = 21; //备注
 
 }
 

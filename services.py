@@ -26,6 +26,7 @@ from actions.share_action import ShareActionService
 from relations.follow import FollowUserService
 from relations.unfollow import UnfollowUserService
 from relations.black_user import BlackUserService
+from relations.unblack_user import UnblackUserService
 from relations.mark_friend import MarkFriendService
 from relations.get_follows import GetFollowsService
 from relations.get_fans import GetFansService

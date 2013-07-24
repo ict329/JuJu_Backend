@@ -2,8 +2,7 @@ import string
 
 def get_type_value(tp, str_value, default_value):
     try:
-        value = tp(str_value)
-        return value
+        return tp(str_value)
     except:
         return default_value
 

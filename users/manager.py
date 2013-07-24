@@ -59,6 +59,8 @@ def login(uname, password, **args):
 
 def get_user(uid):
     try:
+        if type(uid) == str:
+            uid = ObjectId(uid)
         return User.objects.get(pk=uid)
     except:
         return None
@@ -70,14 +72,14 @@ def get_user_by_uname(uname):
         return None
 
 def get_users(uids):
-#    try:
-    for uid in uids:
-        log.info('uid = %s, type = %s' % (uid, type(uid)))
-    users = User.objects(pk__in=uids)
-    log.info('users length = %d' % (len(users)))
-    return users
-#    except:
-    return None
+    try:
+        if type(uids[0]) == str:
+            uids = [ObjectId(uid) for uid in uids]
+        users = User.objects(pk__in=uids)
+        log.info('users length = %d' % (len(users)))
+        return users
+    except:
+        return [] 
 
 def register(uname, password, **args):
     user = User()
@@ -183,18 +185,3 @@ def inc(uid, kv, min_value = 0):
                 origin = 0
         setattr(stat, k, max(origin + v, min_value))
     user.save()
-    
-##### TEST CODE BELOW ######
-
-    def __init__(self, uname, password):
-        basic = UserBasic(uname = uname, password = password, nick = uname)
-        self.basic_info = basic
-        self.save()
-    def __init__(self, uname, password):
-        basic = UserBasic(uname = uname, password = password, nick = uname)
-        self.basic_info = basic
-        self.save()
-    def __init__(self, uname, password):
-        basic = UserBasic(uname = uname, password = password, nick = uname)
-        self.basic_info = basic
-        self.save()

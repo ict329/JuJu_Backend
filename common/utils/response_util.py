@@ -5,18 +5,22 @@ from pbmodels.response_pb2 import *
 from core.error import ERROR_DICT
 
 
+SUCCESS_RESPONSE = get_error_response(SUCCESS)
 
 def get_error_response(code, error_message = None):
     response = PBResponse()
     response.code = code
-    if error_message is None:
-        if code in ERROR_DICT:
-            response.error_message = ERROR_DICT[code]
-        else:
-            response.error_message = ERROR_DICT[UNKNOW_ERROR]
-    else:
+
+    if error_message:
         response.error_message = error_message
+    else:
+        response.error_message = ERROR_DICT.get(code, ERROR_DICT[UNKNOW_ERROR])
     return response
 
-
-SUCCESS_RESPONSE = get_error_response(SUCCESS)
+def update_users(res, users):
+    res.code = SUCCESS
+    if not users:
+        return
+    for user in users:
+        pbuser = res.users.add()
+        user.update_pb(pbuser)
