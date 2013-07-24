@@ -10,7 +10,6 @@ class BlackUserService(JJService):
         JJService.__init__(self, request)
    
     def _parse_request(self):
-        self.uid = request_util.get_value(self.request, 'uid')
         self.fid = request_util.get_value(self.request, 'fid')
         
     def _check_parameters(self):

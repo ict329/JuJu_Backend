@@ -35,3 +35,7 @@ def getfans():
 @bp.route('/getfollows')
 def getfollows():
     return GetFollowsService(request).handle()
+
+@bp.route('/getblacks')
+def getblacks():
+    return GetBlacksService(request).handle()

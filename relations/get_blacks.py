@@ -11,7 +11,6 @@ class GetBlacksService(JJService):
         JJService.__init__(self, request)
    
     def _parse_request(self):
-        self.uid = request_util.get_value(self.request, 'uid')
 
         self.offset = request_util.get_value(self.request, 'offset')
         self.offset = str_util.get_int_value(self.offset, 0)

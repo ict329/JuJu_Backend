@@ -7,6 +7,8 @@ import logging
 from flask import request, session
 from pbmodels.response_pb2 import *
 from common.utils.response_util import *
+from settings import *
+import common.utils.request_util as request_util
 
 class Service(object):
 
@@ -35,6 +37,14 @@ class JJService(object):
         self.data = None
         self.request = request
         self.session = session
+        if USE_SESSION:
+            try:
+                self.uid = self.session['uid']
+            except:
+                self.uid = None
+        else:
+            self.uid = request_util.get_value(request, 'uid')
+            
 
     #protected methods, to be override
     def _parse_request(self):
