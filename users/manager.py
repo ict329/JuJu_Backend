@@ -76,7 +76,6 @@ def get_users(uids):
         if type(uids[0]) == str:
             uids = [ObjectId(uid) for uid in uids]
         users = User.objects(pk__in=uids)
-        log.info('users length = %d' % (len(users)))
         return users
     except:
         return [] 

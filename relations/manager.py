@@ -68,26 +68,18 @@ def _get_follow_relation_list(uid, offset, count):
     uid = ObjectId(uid)
     try:
         relations = Relation.objects(uid=uid, relation=FOLLOW).order_by('-_id')[offset:count]
-        log.info('get follow relation len = %d', (len(relations)))
-        log.info(relations)
         return relations
     except:
         relations = Relation.objects(uid=uid, relation=FOLLOW).order_by('-_id')
-        log.info('get follow except: relation len = %d', (len(relations)))
-        log.info(relations)
         return relations
 
 def _get_fan_relation_list(uid, offset, count):
     uid = ObjectId(uid)
     try:
         relations = Relation.objects(fid=uid, relation=FOLLOW).order_by('-_id')[offset:count]
-        log.info('get fans relation len = %d', (len(relations)))
-        log.info(relations)
         return relations
     except:
         relations = Relation.objects(fid=uid, relation=FOLLOW).order_by('-_id')
-        log.info('get fans except: relation len = %d', (len(relations)))
-        log.info(relations)
         return relations
 
 def _get_black_relation_list(uid, offset, count):
@@ -100,32 +92,30 @@ def _get_black_relation_list(uid, offset, count):
 ########
 
 def _get_follows_from_relations(relations):
-    if not relations or len(relations) == 0:
-        log.info('relations is empty')
-        return []
-    uids = [relation.fid for relation in relations]
-    users = user_manager.get_users(uids)
-    kv = {relation.fid : relation for relation in relations}
-    for user in users:
-        relation = kv[relation.fid]
-        user.basic_info.mark = relation.mark
-        user.reg_info = None
-        user.log_info = None
-    return users
+    if relations:
+        uids = [relation.fid for relation in relations]
+        users = user_manager.get_users(uids)
+        kv = {relation.fid : relation for relation in relations}
+        for user in users:
+            relation = kv[relation.fid]
+            user.basic_info.mark = relation.mark
+            user.reg_info = None
+            user.log_info = None
+        return users
+    return []
 
 def _get_fans_from_relations(relations):
-    if not relations or len(relations) == 0:
-        log.info('relations is empty')
-        return [] 
-    uids = [relation.uid for relation in relations]
-    users = user_manager.get_users(uids)
-    kv = {relation.uid : relation for relation in relations}
-    for user in users:
-        relation = kv[relation.uid]
-        user.basic_info.mark = relation.mark
-        user.reg_info = None
-        user.log_info = None
-    return users
+    if relations:
+        uids = [relation.uid for relation in relations]
+        users = user_manager.get_users(uids)
+        kv = {relation.uid : relation for relation in relations}
+        for user in users:
+            relation = kv[relation.uid]
+            user.basic_info.mark = relation.mark
+            user.reg_info = None
+            user.log_info = None
+        return users
+    return [] 
  
 
 def get_follow_list(uid, offset, count):

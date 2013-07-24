@@ -16,7 +16,6 @@ def get_float_value(str_value, default_value = 0.0):
     return get_type_value(float, str_value, default_value)
 
 def is_empty(str_value):
-    return str_value == None or len(str_value.strip()) == 0 
-
+    return not str_value or not str_value.strip()
 
 
