@@ -19,8 +19,8 @@ class Album(Document):
     image_list = ListField(StringField())
 
 class Comment (Document):
+    action_id = ObjectId(required = True)
     uid = ObjectIdField()
-    c_date = DateTimeField(required=True)
     content = StringField()
     star = IntField()
     is_reply = BooleanField()
@@ -79,7 +79,7 @@ class CommonActivity(EmbeddedDocument):
 
 
 class Party(CommonActivity):
-    merchant = ReferenceField(Merchant)
+    merchant_id = ObjectId(required = True) 
     location = EmbeddedDocumentField(Location)
 
 class Traffic(CommonActivity):
@@ -87,7 +87,7 @@ class Traffic(CommonActivity):
     end_loc = EmbeddedDocumentField(Location)
 
 class Shopping(CommonActivity):
-    merchant = ReferenceField(Merchant)
+    merchant_id = ObjectId(required = True) 
     location = EmbeddedDocumentField(Location)
 
 class Activity(Document):
@@ -99,6 +99,8 @@ class Activity(Document):
 
 class Action(Document):
     type = IntField(required=True)
-    user = ReferenceField(BriefUser) 
-    activity = ReferenceField(Activity) 
+    uid = ObjectId(required = True) 
+    activity = EmbeddedDocumentField(Activity) #if type is activity
+    action_id = ObjectId() #if type is share or join
     comment = StringField()
+
