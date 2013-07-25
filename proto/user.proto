@@ -32,6 +32,9 @@ enum PBUserStatus{
     OFFLINE = 1;
     ONLINE = 2;
     HIDDEN = 3;
+    AWAY = 4;
+
+    UNLOGIN = 10;
 }
 
 
@@ -118,3 +121,14 @@ message PBUser
     optional PBStatistic statistic = 7;
 }
 
+
+message PBBriefUser
+{
+    required string uid = 1;
+    required string uname= 2;
+    optional string nick = 3;
+    optional PBUserRole role = 4[default=USER];
+    optional bool gender = 5;
+    optional string avatar = 6;
+    optional PBUserStatus status = 7[default=OFFLINE];
+}

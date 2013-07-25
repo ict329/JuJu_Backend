@@ -121,6 +121,14 @@ _PBUSERSTATUS = descriptor.EnumDescriptor(
       name='HIDDEN', index=2, number=3,
       options=None,
       type=None),
+    descriptor.EnumValueDescriptor(
+      name='AWAY', index=3, number=4,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='UNLOGIN', index=4, number=10,
+      options=None,
+      type=None),
   ],
   options=None,
 )
@@ -146,6 +154,8 @@ FORBIDDEN = 4
 OFFLINE = 1
 ONLINE = 2
 HIDDEN = 3
+AWAY = 4
+UNLOGIN = 10
 
 
 
@@ -575,6 +585,70 @@ _PBUSER = descriptor.Descriptor(
   ],
   options=None)
 
+
+_PBBRIEFUSER = descriptor.Descriptor(
+  name='PBBriefUser',
+  full_name='PBBriefUser',
+  filename='user.proto',
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='uid', full_name='PBBriefUser.uid', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='uname', full_name='PBBriefUser.uname', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='nick', full_name='PBBriefUser.nick', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='role', full_name='PBBriefUser.role', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='gender', full_name='PBBriefUser.gender', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='avatar', full_name='PBBriefUser.avatar', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='status', full_name='PBBriefUser.status', index=6,
+      number=7, type=14, cpp_type=8, label=1,
+      default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],  # TODO(robinson): Implement.
+  enum_types=[
+  ],
+  options=None)
+
 import basic_pb2
 
 _PBREGISTRATION.fields_by_name['reg_type'].enum_type = _PBREGTYPE
@@ -587,6 +661,8 @@ _PBUSER.fields_by_name['log_info'].message_type = _PBLOG
 _PBUSER.fields_by_name['device_info'].message_type = _PBDEVICE
 _PBUSER.fields_by_name['sns_info'].message_type = _PBSNS
 _PBUSER.fields_by_name['statistic'].message_type = _PBSTATISTIC
+_PBBRIEFUSER.fields_by_name['role'].enum_type = _PBUSERROLE
+_PBBRIEFUSER.fields_by_name['status'].enum_type = _PBUSERSTATUS
 
 class PBSNS(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
@@ -615,4 +691,8 @@ class PBUserBasic(message.Message):
 class PBUser(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _PBUSER
+
+class PBBriefUser(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PBBRIEFUSER
 

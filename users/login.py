@@ -47,8 +47,9 @@ class LoginService(JJService):
                     device_id=self.device_id, device_name=self.device_name, \
                     device_os=self.device_os, device_token=self.device_token)
 
-#TODO set/update session
             self.session['uid'] = str(user.pk)
+            self.session['uname']
+            self.session['role'] = user.basic_info.role
             res = SUCCESS_RESPONSE
             user.update_pb(res.user)
             return res.SerializeToString()

@@ -165,7 +165,7 @@ message PBAction{
    required string action_id = 1;
    required PBActionType type = 2;
    required int32 c_date = 3;
-   required PBUserBasic user = 4; //use for return
+   required PBBriefUser user = 4; //use for return
 
    //one for select
    optional PBActivity activity = 20;

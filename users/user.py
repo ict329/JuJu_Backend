@@ -132,8 +132,12 @@ class User(Document):
         if self.pk is not None:
             user.uid = str(self.pk)
 
-
     def build_pb(self):
         user = PBUser()
         self.update_pb(user)
         return user
+        
+    def update_briefuser(self, briefuser):
+        l = ('uname','nick','role','gender','avatar','sttus')
+        update_pb_with_document(briefuser, self.basic_info, l)
+        briefuser.uid = str(self.pk)

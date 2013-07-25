@@ -40,9 +40,9 @@ message PBResponse
     repeated PBUser users = 12;
     repeated PBActivity activitys = 13;
     repeated PBComment comments = 14;
+    repeated PBBriefUser briefUsers = 15;
 
     optional PBUser user = 50;
     optional PBAction action = 51;
     optional PBMerchant merchant = 52;
-
 }

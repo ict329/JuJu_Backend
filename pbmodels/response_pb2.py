@@ -150,21 +150,28 @@ _PBRESPONSE = descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='user', full_name='PBResponse.user', index=7,
+      name='briefUsers', full_name='PBResponse.briefUsers', index=7,
+      number=15, type=11, cpp_type=10, label=3,
+      default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='user', full_name='PBResponse.user', index=8,
       number=50, type=11, cpp_type=10, label=1,
       default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='action', full_name='PBResponse.action', index=8,
+      name='action', full_name='PBResponse.action', index=9,
       number=51, type=11, cpp_type=10, label=1,
       default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='merchant', full_name='PBResponse.merchant', index=9,
+      name='merchant', full_name='PBResponse.merchant', index=10,
       number=52, type=11, cpp_type=10, label=1,
       default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -189,6 +196,7 @@ _PBRESPONSE.fields_by_name['messages'].message_type = message_pb2._PBMESSAGE
 _PBRESPONSE.fields_by_name['users'].message_type = user_pb2._PBUSER
 _PBRESPONSE.fields_by_name['activitys'].message_type = action_pb2._PBACTIVITY
 _PBRESPONSE.fields_by_name['comments'].message_type = action_pb2._PBCOMMENT
+_PBRESPONSE.fields_by_name['briefUsers'].message_type = user_pb2._PBBRIEFUSER
 _PBRESPONSE.fields_by_name['user'].message_type = user_pb2._PBUSER
 _PBRESPONSE.fields_by_name['action'].message_type = action_pb2._PBACTION
 _PBRESPONSE.fields_by_name['merchant'].message_type = action_pb2._PBMERCHANT
