@@ -8,6 +8,11 @@ from core.service import JJService
 from users.user import User
 from pbmodels.response_pb2 import *
 from common.utils.response_util import *
+import logging
+
+
+log = logging.getLogger('LoginService')
+
 
 
 class LoginService(JJService):
@@ -48,11 +53,11 @@ class LoginService(JJService):
                     device_os=self.device_os, device_token=self.device_token)
 
             self.session['uid'] = str(user.pk)
-            self.session['uname']
+            self.session['uname'] = user.basic_info.uname
             self.session['role'] = user.basic_info.role
             res = SUCCESS_RESPONSE
             user.update_pb(res.user)
             return res.SerializeToString()
-        except:
+        except Exception, e:
             self.code = USER_NOT_EXISTS_ERROR
             return JJService._handle_error(self)

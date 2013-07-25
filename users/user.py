@@ -3,6 +3,7 @@
 from mongoengine import *
 from pbmodels.basic_pb2 import *
 from pbmodels.user_pb2 import *
+from pbmodels.response_pb2 import *
 from utils import *
 from utils import *
 
@@ -12,7 +13,7 @@ class UserBasic(EmbeddedDocument):
     uname = StringField(max_length=50, required=True, unique = True)
     nick = StringField(max_length=50, required=True)
     password = StringField(max_length=50)
-    role = IntField()
+    role = IntField(default=USER)
     gender = BooleanField()
     avatar = StringField()
     status = IntField()
