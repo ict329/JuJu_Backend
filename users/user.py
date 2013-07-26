@@ -142,3 +142,11 @@ class User(Document):
         l = ('uname','nick','role','gender','avatar','sttus')
         update_pb_with_document(briefuser, self.basic_info, l)
         briefuser.uid = str(self.pk)
+
+    def update_briefuser(self, briefuser):
+        pass
+
+    def build_briefuser(self):
+        briefuser = PBBriefUser()
+        self.update_briefuser(briefuser)
+        return briefuser

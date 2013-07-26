@@ -19,7 +19,10 @@ ALBUM_ID	constant/para.py	/^ALBUM_ID = "album_id"$/;"	v
 ALLOWED_UPLOAD_EXTENSIONS	common/utils/upload_util.py	/^ALLOWED_UPLOAD_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg'])$/;"	v
 AUTH_ERROR	pbmodels/response_pb2.py	/^AUTH_ERROR = 4$/;"	v
 AVATAR	constant/para.py	/^AVATAR = "avatar"$/;"	v
+AWAY	pbmodels/user_pb2.py	/^AWAY = 4$/;"	v
 Action	actions/action.py	/^class Action(Document):$/;"	c
+Activity	actions/action.py	/^class Activity(EmbeddedDocument):$/;"	c
+Album	actions/action.py	/^class Album(Document):$/;"	c
 BIRTH_DATE	constant/para.py	/^BIRTH_DATE = "birth_date"$/;"	v
 BLACK	pbmodels/user_pb2.py	/^BLACK = 4$/;"	v
 BindSNSService	services.py	/^from users.bind_sns import BindSNSService$/;"	i
@@ -43,8 +46,10 @@ COUNTRY_CODE	constant/para.py	/^COUNTRY_CODE = "country_code"$/;"	v
 COUNTY	constant/para.py	/^COUNTY = "county"$/;"	v
 C_DATE	constant/para.py	/^C_DATE = "c_date"$/;"	v
 CallbackDict	core/session.py	/^from werkzeug.datastructures import CallbackDict$/;"	i
+Comment	actions/action.py	/^class Comment (Document):$/;"	c
 CommentActionService	actions/comment_action.py	/^class CommentActionService(JJService):$/;"	c
 CommentActionService	services.py	/^from actions.comment_action import CommentActionService$/;"	i
+CommonActivity	actions/action.py	/^class CommonActivity(EmbeddedDocument):$/;"	c
 CreateActivityService	actions/create_activity.py	/^class CreateActivityService(JJService):$/;"	c
 CreateActivityService	services.py	/^from actions.create_activity import CreateActivityService$/;"	i
 DATABASE	settings.py	/^DATABASE = 'juju'$/;"	v
@@ -66,6 +71,7 @@ DESCRIPTOR	pbmodels/basic_pb2.py	/^  DESCRIPTOR = _PBCONTACT$/;"	v	class:PBConta
 DESCRIPTOR	pbmodels/basic_pb2.py	/^  DESCRIPTOR = _PBLOCATION$/;"	v	class:PBLocation
 DESCRIPTOR	pbmodels/message_pb2.py	/^  DESCRIPTOR = _PBMESSAGE$/;"	v	class:PBMessage
 DESCRIPTOR	pbmodels/response_pb2.py	/^  DESCRIPTOR = _PBRESPONSE$/;"	v	class:PBResponse
+DESCRIPTOR	pbmodels/user_pb2.py	/^  DESCRIPTOR = _PBBRIEFUSER$/;"	v	class:PBBriefUser
 DESCRIPTOR	pbmodels/user_pb2.py	/^  DESCRIPTOR = _PBDEVICE$/;"	v	class:PBDevice
 DESCRIPTOR	pbmodels/user_pb2.py	/^  DESCRIPTOR = _PBLOG$/;"	v	class:PBLog
 DESCRIPTOR	pbmodels/user_pb2.py	/^  DESCRIPTOR = _PBREGISTRATION$/;"	v	class:PBRegistration
@@ -78,6 +84,7 @@ DEVICE_INFO	constant/para.py	/^DEVICE_INFO = "device_info"$/;"	v
 DEVICE_NAME	constant/para.py	/^DEVICE_NAME = "device_name"$/;"	v
 DEVICE_OS	constant/para.py	/^DEVICE_OS = "device_os"$/;"	v
 DEVICE_TOKEN	constant/para.py	/^DEVICE_TOKEN = "device_token"$/;"	v
+DI	test.py	/^DI = True$/;"	v
 DIGEST	constant/para.py	/^DIGEST = "digest"$/;"	v
 DeleteActionService	actions/delete_action.py	/^class DeleteActionService(JJService):$/;"	c
 DeleteActionService	services.py	/^from actions.delete_action import DeleteActionService$/;"	i
@@ -186,6 +193,7 @@ MONGO_PORT	settings.py	/^MONGO_PORT = 27017$/;"	v
 MY_ACTIVITY	constant/para.py	/^MY_ACTIVITY = "my_activity"$/;"	v
 MarkFriendService	relations/mark_friend.py	/^class MarkFriendService(JJService):$/;"	c
 MarkFriendService	services.py	/^from relations.mark_friend import MarkFriendService$/;"	i
+Merchant	actions/action.py	/^class Merchant(Document):$/;"	c
 NAME	constant/para.py	/^NAME = "name"$/;"	v
 NETWORK_ERROR	pbmodels/response_pb2.py	/^NETWORK_ERROR = 5$/;"	v
 NEW_FAN_COUNT	constant/para.py	/^NEW_FAN_COUNT = "new_fan_count"$/;"	v
@@ -201,6 +209,7 @@ OFFLINE	pbmodels/user_pb2.py	/^OFFLINE = 1$/;"	v
 OFFSET	constant/para.py	/^OFFSET="offset"$/;"	v
 ONLINE	pbmodels/user_pb2.py	/^ONLINE = 2$/;"	v
 OTHER	pbmodels/action_pb2.py	/^OTHER = 10$/;"	v
+ObjectId	actions/action.py	/^from bson.objectid import ObjectId$/;"	i
 ObjectId	common/utils/upload_util.py	/^from bson.objectid import ObjectId$/;"	i
 ObjectId	relations/manager.py	/^from bson.objectid import ObjectId$/;"	i
 ObjectId	test.py	/^from bson.objectid import ObjectId$/;"	i
@@ -217,6 +226,7 @@ PAY_TYPE	constant/para.py	/^PAY_TYPE = "pay_type"$/;"	v
 PBAction	pbmodels/action_pb2.py	/^class PBAction(message.Message):$/;"	c
 PBActivity	pbmodels/action_pb2.py	/^class PBActivity(message.Message):$/;"	c
 PBAlbum	pbmodels/action_pb2.py	/^class PBAlbum(message.Message):$/;"	c
+PBBriefUser	pbmodels/user_pb2.py	/^class PBBriefUser(message.Message):$/;"	c
 PBComment	pbmodels/action_pb2.py	/^class PBComment(message.Message):$/;"	c
 PBContact	pbmodels/basic_pb2.py	/^class PBContact(message.Message):$/;"	c
 PBDevice	pbmodels/user_pb2.py	/^class PBDevice(message.Message):$/;"	c
@@ -240,6 +250,9 @@ PBUserBasic	pbmodels/user_pb2.py	/^class PBUserBasic(message.Message):$/;"	c
 PHOTO_LIST	constant/para.py	/^PHOTO_LIST = "photo_list"$/;"	v
 PRICE	constant/para.py	/^PRICE = "price"$/;"	v
 PROVINCE	constant/para.py	/^PROVINCE = "province"$/;"	v
+Party	actions/action.py	/^class Party(CommonActivity):$/;"	c
+Post	test.py	/^class Post(Document):$/;"	c
+Promotion	actions/action.py	/^class Promotion(Document):$/;"	c
 QQ_NUMBER	constant/para.py	/^QQ_NUMBER = "qq_number"$/;"	v
 QQ_SPACE	pbmodels/user_pb2.py	/^QQ_SPACE = 4$/;"	v
 QQ_WEIBO	pbmodels/user_pb2.py	/^QQ_WEIBO = 2$/;"	v
@@ -305,6 +318,7 @@ SessionInterface	core/session.py	/^from flask.sessions import SessionInterface, 
 SessionMixin	core/session.py	/^from flask.sessions import SessionInterface, SessionMixin$/;"	i
 ShareActionService	actions/share_action.py	/^class ShareActionService(JJService):$/;"	c
 ShareActionService	services.py	/^from actions.share_action import ShareActionService$/;"	i
+Shopping	actions/action.py	/^class Shopping(CommonActivity):$/;"	c
 Statistic	users/user.py	/^class Statistic(EmbeddedDocument):$/;"	c
 TAGS	constant/para.py	/^TAGS = "tags"$/;"	v
 TEL	constant/para.py	/^TEL = "tel"$/;"	v
@@ -324,11 +338,13 @@ T_INDEX	constant/db.py	/^T_INDEX = 'index'$/;"	v
 T_MERCHANT	constant/db.py	/^T_MERCHANT = 'merchant'$/;"	v
 T_MESSAGE	constant/db.py	/^T_MESSAGE = 'message'$/;"	v
 T_RELATION	constant/db.py	/^T_RELATION = 'relation'$/;"	v
+Traffic	actions/action.py	/^class Traffic(CommonActivity):$/;"	c
 UID	constant/para.py	/^UID = "uid"$/;"	v
 UNAME	constant/para.py	/^UNAME = "uname"$/;"	v
-UNAME_EXISTS_ERROR	pbmodels/response_pb2.py	/^UNAME_EXISTS_ERROR = 10001$/;"	v
+UNAME_EXISTS_ERROR	pbmodels/response_pb2.py	/^UNAME_EXISTS_ERROR = 10004$/;"	v
 UNKNOW_ERROR	pbmodels/response_pb2.py	/^UNKNOW_ERROR = -1$/;"	v
 UNKNOW_ERROR_RESPONSE	common/utils/response_util.py	/^UNKNOW_ERROR_RESPONSE = get_error_response(UNKNOW_ERROR)$/;"	v
+UNLOGIN	pbmodels/user_pb2.py	/^UNLOGIN = 10$/;"	v
 UNLOGIN_ERROR	pbmodels/response_pb2.py	/^UNLOGIN_ERROR = 7$/;"	v
 UNREAD	pbmodels/message_pb2.py	/^UNREAD = 1$/;"	v
 UPLOAD_FOLDER	settings.py	/^UPLOAD_FOLDER = '\/upload'$/;"	v
@@ -345,6 +361,7 @@ UpdateDeviceService	services.py	/^from users.update_device import UpdateDeviceSe
 UpdateDeviceService	users/update_device.py	/^class UpdateDeviceService(JJService):$/;"	c
 UpdateProfileService	services.py	/^from users.update_profile import UpdateProfileService$/;"	i
 UpdateProfileService	users/update_profile.py	/^class UpdateProfileService(JJService):$/;"	c
+User	test.py	/^class User(Document):$/;"	c
 User	users/login.py	/^from users.user import User$/;"	i
 User	users/register.py	/^from users.user import User$/;"	i
 User	users/snslogin.py	/^from users.user import User$/;"	i
@@ -364,6 +381,7 @@ _PBACTIONTYPE	pbmodels/action_pb2.py	/^_PBACTIONTYPE = descriptor.EnumDescriptor
 _PBACTIVITY	pbmodels/action_pb2.py	/^_PBACTIVITY = descriptor.Descriptor($/;"	v
 _PBACTIVITYTYPE	pbmodels/action_pb2.py	/^_PBACTIVITYTYPE = descriptor.EnumDescriptor($/;"	v
 _PBALBUM	pbmodels/action_pb2.py	/^_PBALBUM = descriptor.Descriptor($/;"	v
+_PBBRIEFUSER	pbmodels/user_pb2.py	/^_PBBRIEFUSER = descriptor.Descriptor($/;"	v
 _PBCOMMENT	pbmodels/action_pb2.py	/^_PBCOMMENT = descriptor.Descriptor($/;"	v
 _PBCONTACT	pbmodels/basic_pb2.py	/^_PBCONTACT = descriptor.Descriptor($/;"	v
 _PBDEVICE	pbmodels/user_pb2.py	/^_PBDEVICE = descriptor.Descriptor($/;"	v
@@ -434,6 +452,7 @@ __metaclass__	pbmodels/basic_pb2.py	/^  __metaclass__ = reflection.GeneratedProt
 __metaclass__	pbmodels/basic_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBLocation
 __metaclass__	pbmodels/message_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBMessage
 __metaclass__	pbmodels/response_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBResponse
+__metaclass__	pbmodels/user_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBBriefUser
 __metaclass__	pbmodels/user_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBDevice
 __metaclass__	pbmodels/user_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBLog
 __metaclass__	pbmodels/user_pb2.py	/^  __metaclass__ = reflection.GeneratedProtocolMessageType$/;"	v	class:PBRegistration
@@ -494,9 +513,7 @@ _check_parameters	users/update_device.py	/^    def _check_parameters(self):$/;"	
 _check_parameters	users/update_profile.py	/^    def _check_parameters(self):$/;"	m	class:UpdateProfileService
 _get_black_relation_list	relations/manager.py	/^def _get_black_relation_list(uid, offset, count):$/;"	f
 _get_fan_relation_list	relations/manager.py	/^def _get_fan_relation_list(uid, offset, count):$/;"	f
-_get_fans_from_relations	relations/manager.py	/^def _get_fans_from_relations(relations):$/;"	f
 _get_follow_relation_list	relations/manager.py	/^def _get_follow_relation_list(uid, offset, count):$/;"	f
-_get_follows_from_relations	relations/manager.py	/^def _get_follows_from_relations(relations):$/;"	f
 _get_relation	relations/manager.py	/^def _get_relation(uid, fid):$/;"	f
 _get_value_with_field	users/manager.py	/^def _get_value_with_field(info, field):$/;"	f
 _handle_data	actions/comment_action.py	/^    def _handle_data(self):$/;"	m	class:CommentActionService
@@ -567,14 +584,27 @@ _set_relation	relations/manager.py	/^def _set_relation(uid, fid, relation):$/;"	
 _set_value	users/manager.py	/^def _set_value(dist, attr, src, field, nil_value):$/;"	f
 _update_device_info	users/manager.py	/^def _update_device_info(device_info, info):$/;"	f
 _update_log_info	users/manager.py	/^def _update_log_info(log_info, info):$/;"	f
+_update_mark	relations/manager.py	/^def _update_mark(relations):$/;"	f
 _update_user_device_log_info	users/manager.py	/^def _update_user_device_log_info(user, args):$/;"	f
+a	test.py	/^    a = User(uname='a',nick='aa')$/;"	v
+a	test.py	/^a = User(uname='a')$/;"	v
+action	actions/action.py	/^    action= ReferenceField(Action)$/;"	v	class:Comment
+action_id	actions/action.py	/^    action_id = ObjectId() #if type is share or join$/;"	v	class:Action
 action_pb2	pbmodels/response_pb2.py	/^import action_pb2$/;"	i
+action_type	actions/action.py	/^    action_type = IntField(required=True)$/;"	v	class:Action
+activity	actions/action.py	/^    activity = EmbeddedDocumentField(Activity) #if type is activity$/;"	v	class:Action
+activity_type	actions/action.py	/^    activity_type = IntField(required=True)$/;"	v	class:Activity
 add_action	api/actions.py	/^def add_action():$/;"	f
 add_user	api/users.py	/^def add_user():$/;"	f
+addr	actions/action.py	/^    addr = StringField()$/;"	v	class:Merchant
+aibang_id	actions/action.py	/^    aibang_id = StringField(max_length=50)$/;"	v	class:Merchant
 allowed_file	common/utils/upload_util.py	/^def allowed_file(filename, file_extensions):$/;"	f
 api	app.py	/^import api$/;"	i
 app	app.py	/^app = create_app()$/;"	v
+author	test.py	/^    author = ReferenceField(User)$/;"	v	class:Post
+authors	test.py	/^    authors = ListField(ReferenceField(User))$/;"	v	class:Post
 avatar	users/user.py	/^    avatar = StringField()$/;"	v	class:UserBasic
+b	test.py	/^    b = User(uname='b',nick='bb')$/;"	v
 basic_info	users/user.py	/^    basic_info = EmbeddedDocumentField(UserBasic, required=True)$/;"	v	class:User
 basic_pb2	pbmodels/action_pb2.py	/^import basic_pb2$/;"	i
 basic_pb2	pbmodels/message_pb2.py	/^import basic_pb2$/;"	i
@@ -586,8 +616,13 @@ black	relations/manager.py	/^def black(uid, fid):$/;"	f
 bp	api/actions.py	/^bp = Blueprint('actions', __name__, url_prefix='\/api\/actions')$/;"	v
 bp	api/relations.py	/^bp = Blueprint('relations', __name__, url_prefix='\/api\/relations')$/;"	v
 bp	api/users.py	/^bp = Blueprint('users', __name__, url_prefix='\/api\/users')$/;"	v
+budget	actions/action.py	/^    budget = IntField()$/;"	v	class:CommonActivity
+build_briefuser	users/user.py	/^    def build_briefuser(self):$/;"	m	class:User
 build_pb	users/user.py	/^    def build_pb(self):$/;"	m	class:User
+c	test.py	/^    c = User(uname='c',nick='cc')$/;"	v
 c_date	relations/relation.py	/^    c_date = DateTimeField()$/;"	v	class:Relation
+cate	actions/action.py	/^    cate = StringField(max_length=50)$/;"	v	class:Merchant
+comment_count	actions/action.py	/^    comment_count = IntField()$/;"	v	class:CommonActivity
 common	core/service.py	/^import common.utils.request_util as request_util$/;"	i
 common	core/service.py	/^import common.utils.request_util$/;"	i
 common	core/service.py	/^import common.utils.str_util$/;"	i
@@ -626,24 +661,33 @@ common	users/snslogin.py	/^import common.utils.request_util as request_util$/;"	
 common	users/snslogin.py	/^import common.utils.str_util as str_util$/;"	i
 connect	app.py	/^from mongoengine import connect$/;"	i
 connect	test.py	/^from mongoengine import connect$/;"	i
+constant	actions/action.py	/^import constant.db as db$/;"	i
+constant	actions/action.py	/^import constant.para as para$/;"	i
 constant	users/login.py	/^import constant.para as para$/;"	i
 constant	users/logout.py	/^import constant.para as para$/;"	i
 constant	users/manager.py	/^import constant.para as para$/;"	i
 constant	users/register.py	/^import constant.para as para$/;"	i
 constant	users/snslogin.py	/^import constant.para as para$/;"	i
 constant	users/update_profile.py	/^import constant.para as para$/;"	i
+contact	actions/action.py	/^    contact = EmbeddedDocumentField(Contact)$/;"	v	class:CommonActivity
 containing_type	pbmodels/action_pb2.py	/^  containing_type=None,$/;"	v
 containing_type	pbmodels/basic_pb2.py	/^  containing_type=None,$/;"	v
 containing_type	pbmodels/message_pb2.py	/^  containing_type=None,$/;"	v
 containing_type	pbmodels/response_pb2.py	/^  containing_type=None,$/;"	v
 containing_type	pbmodels/user_pb2.py	/^  containing_type=None,$/;"	v
+content	actions/action.py	/^    content = StringField()$/;"	v	class:Comment
+content	actions/action.py	/^    content = StringField()$/;"	v	class:CommonActivity
+content	actions/action.py	/^    content = StringField()$/;"	v	class:Promotion
+cost	actions/action.py	/^    cost = IntField()$/;"	v	class:Merchant
 count_user	api/users.py	/^def count_user():$/;"	f
+county	actions/action.py	/^    county = StringField(max_length=50)$/;"	v	class:Merchant
 create_app	app.py	/^def create_app():$/;"	f
 datetime	common/utils/date_util.py	/^import datetime, time $/;"	i
 datetime	relations/manager.py	/^import datetime$/;"	i
 datetime	test.py	/^import datetime$/;"	i
 datetime	users/manager.py	/^import datetime$/;"	i
 datetime_to_timestamp	common/utils/date_util.py	/^def datetime_to_timestamp(dt):$/;"	f
+db	actions/action.py	/^import constant.db as db$/;"	i
 default_value	pbmodels/action_pb2.py	/^      default_value=0,$/;"	v
 default_value	pbmodels/action_pb2.py	/^      default_value=1,$/;"	v
 default_value	pbmodels/action_pb2.py	/^      default_value=False,$/;"	v
@@ -668,6 +712,7 @@ default_value	pbmodels/user_pb2.py	/^      default_value=[],$/;"	v
 default_value	pbmodels/user_pb2.py	/^      default_value=unicode("", "utf-8"),$/;"	v
 delete	core/service.py	/^    def delete(self):$/;"	m	class:Service
 delete_session	api/users.py	/^def delete_session():$/;"	f
+desc	actions/action.py	/^    desc = StringField()$/;"	v	class:Merchant
 descriptor	pbmodels/action_pb2.py	/^from google.protobuf import descriptor$/;"	i
 descriptor	pbmodels/basic_pb2.py	/^from google.protobuf import descriptor$/;"	i
 descriptor	pbmodels/message_pb2.py	/^from google.protobuf import descriptor$/;"	i
@@ -683,6 +728,9 @@ device_info	users/user.py	/^    device_info = EmbeddedDocumentField(Device)$/;"	
 device_name	users/user.py	/^    device_name = StringField(max_length=50)$/;"	v	class:Device
 device_os	users/user.py	/^    device_os = StringField(max_length=50)$/;"	v	class:Device
 device_token	users/user.py	/^    device_token = StringField(max_length=50)$/;"	v	class:Device
+digest	actions/action.py	/^    digest = StringField(max_length=80)$/;"	v	class:Comment
+end_date	actions/action.py	/^    end_date = DateTimeField(required=True)$/;"	v	class:Promotion
+end_loc	actions/action.py	/^    end_loc = EmbeddedDocumentField(Location)$/;"	v	class:Traffic
 enum_types	pbmodels/action_pb2.py	/^  enum_types=[$/;"	v
 enum_types	pbmodels/basic_pb2.py	/^  enum_types=[$/;"	v
 enum_types	pbmodels/message_pb2.py	/^  enum_types=[$/;"	v
@@ -695,7 +743,6 @@ extensions	pbmodels/response_pb2.py	/^  extensions=[$/;"	v
 extensions	pbmodels/user_pb2.py	/^  extensions=[$/;"	v
 fan_count	users/user.py	/^    fan_count = IntField()$/;"	v	class:Statistic
 favicon	app.py	/^def favicon():$/;"	f
-fid	relations/relation.py	/^    fid = ObjectIdField(required = True)$/;"	v	class:Relation
 fields	pbmodels/action_pb2.py	/^  fields=[$/;"	v
 fields	pbmodels/basic_pb2.py	/^  fields=[$/;"	v
 fields	pbmodels/message_pb2.py	/^  fields=[$/;"	v
@@ -724,6 +771,7 @@ find_all	core/service.py	/^    def find_all(self):$/;"	m	class:Service
 follow	api/relations.py	/^def follow():$/;"	f
 follow	relations/manager.py	/^def follow(uid, fid):$/;"	f
 follow_count	users/user.py	/^    follow_count = IntField()$/;"	v	class:Statistic
+friend	relations/relation.py	/^    friend = ReferenceField(User)$/;"	v	class:Relation
 full_name	pbmodels/action_pb2.py	/^  full_name='PBAction',$/;"	v
 full_name	pbmodels/action_pb2.py	/^  full_name='PBActionStatus',$/;"	v
 full_name	pbmodels/action_pb2.py	/^  full_name='PBActionType',$/;"	v
@@ -746,6 +794,7 @@ full_name	pbmodels/message_pb2.py	/^  full_name='PBMessageStatus',$/;"	v
 full_name	pbmodels/message_pb2.py	/^  full_name='PBMessageType',$/;"	v
 full_name	pbmodels/response_pb2.py	/^  full_name='PBResponse',$/;"	v
 full_name	pbmodels/response_pb2.py	/^  full_name='PBResultCode',$/;"	v
+full_name	pbmodels/user_pb2.py	/^  full_name='PBBriefUser',$/;"	v
 full_name	pbmodels/user_pb2.py	/^  full_name='PBDevice',$/;"	v
 full_name	pbmodels/user_pb2.py	/^  full_name='PBLog',$/;"	v
 full_name	pbmodels/user_pb2.py	/^  full_name='PBRegType',$/;"	v
@@ -785,27 +834,39 @@ getblacks	api/relations.py	/^def getblacks():$/;"	f
 getfans	api/relations.py	/^def getfans():$/;"	f
 getfollows	api/relations.py	/^def getfollows():$/;"	f
 handle	core/service.py	/^    def handle(self):$/;"	m	class:JJService
+hold_time	actions/action.py	/^    hold_time = DateTimeField()$/;"	v	class:CommonActivity
+image_list	actions/action.py	/^    image_list = ListField(StringField())$/;"	v	class:Album
+img_url	actions/action.py	/^    img_url = URLField()$/;"	v	class:Merchant
 importlib	helpers.py	/^import importlib$/;"	i
 inc	users/manager.py	/^def inc(uid, kv, min_value = 0):$/;"	f
-insert	test.py	/^def insert(nick, uname):$/;"	f
 introduction	users/user.py	/^    introduction = StringField()$/;"	v	class:UserBasic
 is_empty	common/utils/str_util.py	/^def is_empty(str_value):$/;"	f
+is_reply	actions/action.py	/^    is_reply = BooleanField()$/;"	v	class:Comment
+join_deadtime	actions/action.py	/^    join_deadtime = DateTimeField()$/;"	v	class:CommonActivity
 json	core/session.py	/^import json$/;"	i
 json	users/user_service.py	/^import json$/;"	i
+l	test.py	/^    l = [] $/;"	v
 last_log_date	users/user.py	/^    last_log_date = DateTimeField()$/;"	v	class:Log
 last_log_ip	users/user.py	/^    last_log_ip = StringField()$/;"	v	class:Log
 last_log_latitude	users/user.py	/^    last_log_latitude = FloatField()$/;"	v	class:Log
 last_log_longitude	users/user.py	/^    last_log_longitude = FloatField()$/;"	v	class:Log
+lat	actions/action.py	/^    lat = FloatField()$/;"	v	class:Merchant
 list_user	api/users.py	/^def list_user():$/;"	f
+lng	actions/action.py	/^    lng = FloatField()$/;"	v	class:Merchant
+location	actions/action.py	/^    location = EmbeddedDocumentField(Location)$/;"	v	class:CommonActivity
+location	actions/action.py	/^    location = EmbeddedDocumentField(Location)$/;"	v	class:Party
+location	actions/action.py	/^    location = EmbeddedDocumentField(Location)$/;"	v	class:Shopping
 log	core/service.py	/^    log = logging.getLogger('Service')$/;"	v	class:JJService
 log	relations/get_follows.py	/^log=logging.getLogger('GetFollowsService')$/;"	v
 log	relations/manager.py	/^log=logging.getLogger('RelationManager')$/;"	v
+log	users/login.py	/^log = logging.getLogger('LoginService')$/;"	v
 log	users/manager.py	/^log = logging.getLogger('UserManager')$/;"	v
 log	users/register.py	/^    log = logging.getLogger('RegisterService')$/;"	v	class:RegisterService
 log_info	users/user.py	/^    log_info = EmbeddedDocumentField(Log)$/;"	v	class:User
 logging	core/service.py	/^import logging$/;"	i
 logging	relations/get_follows.py	/^import logging$/;"	i
 logging	relations/manager.py	/^import logging$/;"	i
+logging	users/login.py	/^import logging$/;"	i
 logging	users/manager.py	/^import logging$/;"	i
 logging	users/register.py	/^import logging$/;"	i
 login	api/users.py	/^def login():$/;"	f
@@ -813,15 +874,23 @@ login	users/manager.py	/^def login(uname, password, **args):$/;"	f
 logout	api/users.py	/^def logout():$/;"	f
 mark	api/relations.py	/^def mark():$/;"	f
 mark	relations/relation.py	/^    mark = StringField(max_length = 50)$/;"	v	class:Relation
+mark_count	actions/action.py	/^    mark_count = IntField()$/;"	v	class:CommonActivity
 mark_friend	relations/manager.py	/^def mark_friend(uid, fid, mark):$/;"	f
+member_limit	actions/action.py	/^    member_limit = IntField()$/;"	v	class:CommonActivity
+merchant	actions/action.py	/^    merchant = ReferenceField(Merchant)$/;"	v	class:Party
+merchant	actions/action.py	/^    merchant = ReferenceField(Merchant)$/;"	v	class:Promotion
+merchant	actions/action.py	/^    merchant = ReferenceField(Merchant)$/;"	v	class:Shopping
 message	pbmodels/action_pb2.py	/^from google.protobuf import message$/;"	i
 message	pbmodels/basic_pb2.py	/^from google.protobuf import message$/;"	i
 message	pbmodels/message_pb2.py	/^from google.protobuf import message$/;"	i
 message	pbmodels/response_pb2.py	/^from google.protobuf import message$/;"	i
 message	pbmodels/user_pb2.py	/^from google.protobuf import message$/;"	i
 message_pb2	pbmodels/response_pb2.py	/^import message_pb2$/;"	i
+meta	actions/action.py	/^    meta = {'allow_inheritance': True}$/;"	v	class:CommonActivity
 mongoengine	users/register.py	/^import mongoengine$/;"	i
 my_activity	users/user.py	/^    my_activity = IntField()$/;"	v	class:Statistic
+name	actions/action.py	/^    name = StringField()$/;"	v	class:Merchant
+name	actions/action.py	/^    name = StringField(max_length=50)$/;"	v	class:Album
 name	pbmodels/action_pb2.py	/^  name='PBAction',$/;"	v
 name	pbmodels/action_pb2.py	/^  name='PBActionStatus',$/;"	v
 name	pbmodels/action_pb2.py	/^  name='PBActionType',$/;"	v
@@ -844,6 +913,7 @@ name	pbmodels/message_pb2.py	/^  name='PBMessageStatus',$/;"	v
 name	pbmodels/message_pb2.py	/^  name='PBMessageType',$/;"	v
 name	pbmodels/response_pb2.py	/^  name='PBResponse',$/;"	v
 name	pbmodels/response_pb2.py	/^  name='PBResultCode',$/;"	v
+name	pbmodels/user_pb2.py	/^  name='PBBriefUser',$/;"	v
 name	pbmodels/user_pb2.py	/^  name='PBDevice',$/;"	v
 name	pbmodels/user_pb2.py	/^  name='PBLog',$/;"	v
 name	pbmodels/user_pb2.py	/^  name='PBRegType',$/;"	v
@@ -865,6 +935,7 @@ new_feed_count	users/user.py	/^    new_feed_count= IntField()$/;"	v	class:Statis
 new_follow_count	users/user.py	/^    new_follow_count = IntField()$/;"	v	class:Statistic
 new_message_count	users/user.py	/^    new_message_count = IntField()$/;"	v	class:Statistic
 new_notice_count	users/user.py	/^    new_notice_count= IntField()$/;"	v	class:Statistic
+nick	test.py	/^    nick = StringField()$/;"	v	class:User
 nick	users/user.py	/^    nick = StringField(max_length=50, required=True)$/;"	v	class:UserBasic
 on_update	core/session.py	/^        def on_update(self):$/;"	f	function:RedisSession.__init__
 open_session	core/session.py	/^    def open_session(self, app, request):$/;"	m	class:RedisSessionInterface
@@ -887,21 +958,33 @@ options	pbmodels/user_pb2.py	/^      options=None,$/;"	v
 options	pbmodels/user_pb2.py	/^  options=None)$/;"	v
 options	pbmodels/user_pb2.py	/^  options=None,$/;"	v
 os	common/utils/upload_util.py	/^import os$/;"	i
+p	test.py	/^p = Post.objects.get(author = a)$/;"	v
+p1	test.py	/^    p1 = Post(title='p1', author = a, authors = l)$/;"	v
+p2	test.py	/^    p2 = Post(title='p2', author = b, authors = l)$/;"	v
+p3	test.py	/^    p3 = Post(title='p3', author = c, authors = l)$/;"	v
+para	actions/action.py	/^import constant.para as para$/;"	i
 para	users/login.py	/^import constant.para as para$/;"	i
 para	users/logout.py	/^import constant.para as para$/;"	i
 para	users/manager.py	/^import constant.para as para$/;"	i
 para	users/register.py	/^import constant.para as para$/;"	i
 para	users/snslogin.py	/^import constant.para as para$/;"	i
 para	users/update_profile.py	/^import constant.para as para$/;"	i
+participant_count	actions/action.py	/^    participant_count = IntField()$/;"	v	class:CommonActivity
+participants	actions/action.py	/^    participants = ListField(StringField())$/;"	v	class:CommonActivity
+party	actions/action.py	/^    party = EmbeddedDocumentField(Party)$/;"	v	class:Activity
 password	users/user.py	/^    password = StringField(max_length=50)$/;"	v	class:UserBasic
+pay_type	actions/action.py	/^    pay_type = IntField(default=AA)$/;"	v	class:CommonActivity
 pbmodels	users/manager.py	/^import pbmodels.user_pb2 as PBUser $/;"	i
+photo_list	actions/action.py	/^    photo_list = ListField(StringField())$/;"	v	class:CommonActivity
 pickle	core/session.py	/^import pickle$/;"	i
 pkgutil	helpers.py	/^import pkgutil$/;"	i
+price	actions/action.py	/^    price = IntField()$/;"	v	class:CommonActivity
+promotions	actions/action.py	/^    promotions = ListField(ReferenceField(Promotion))$/;"	v	class:Merchant
 qq_number	users/user.py	/^    qq_number = StringField(max_length=50)$/;"	v	class:SNS
 qq_weibo_id	users/user.py	/^    qq_weibo_id = StringField(max_length=50)$/;"	v	class:SNS
 qq_weibo_nick	users/user.py	/^    qq_weibo_nick = StringField(max_length=50)$/;"	v	class:SNS
 qq_weibo_token	users/user.py	/^    qq_weibo_token = StringField(max_length=50)$/;"	v	class:SNS
-query	test.py	/^def query():$/;"	f
+rate	actions/action.py	/^    rate = FloatField()$/;"	v	class:Merchant
 reflection	pbmodels/action_pb2.py	/^from google.protobuf import reflection$/;"	i
 reflection	pbmodels/basic_pb2.py	/^from google.protobuf import reflection$/;"	i
 reflection	pbmodels/message_pb2.py	/^from google.protobuf import reflection$/;"	i
@@ -916,6 +999,7 @@ register	users/manager.py	/^def register(uname, password, **args):$/;"	f
 register_all_blueprints	app.py	/^def register_all_blueprints(app):$/;"	f
 register_blueprints	app.py	/^from helpers import register_blueprints$/;"	i
 register_blueprints	helpers.py	/^def register_blueprints(app, package_name, package_path):$/;"	f
+related_action	actions/action.py	/^    related_action = ReferenceField(Action)$/;"	v	class:Action
 relation	relations/relation.py	/^    relation = IntField(required = True)$/;"	v	class:Relation
 relation_between	relations/manager.py	/^def relation_between(uid1, uid2):$/;"	f
 relation_manager	relations/black_user.py	/^import relations.manager as relation_manager$/;"	i
@@ -938,6 +1022,7 @@ remove_session	api/users.py	/^def remove_session():$/;"	f
 renren_id	users/user.py	/^    renren_id = StringField(max_length=50)$/;"	v	class:SNS
 renren_nick	users/user.py	/^    renren_nick = StringField(max_length=50)$/;"	v	class:SNS
 renren_token	users/user.py	/^    renren_token = StringField(max_length=50)$/;"	v	class:SNS
+reply_action	actions/action.py	/^    reply_action = ReferenceField(Action) $/;"	v	class:Comment
 request	actions/comment_action.py	/^from flask import request$/;"	i
 request	actions/create_activity.py	/^from flask import request$/;"	i
 request	actions/delete_action.py	/^from flask import request$/;"	i
@@ -990,7 +1075,7 @@ response_util	relations/unblack_user.py	/^import common.utils.response_util as r
 response_util	relations/unfollow.py	/^import common.utils.response_util as response_util$/;"	i
 response_util	users/logout.py	/^import common.utils.response_util as response_util$/;"	i
 response_util	users/register.py	/^import common.utils.response_util as response_util$/;"	i
-role	users/user.py	/^    role = IntField()$/;"	v	class:UserBasic
+role	users/user.py	/^    role = IntField(default=USER)$/;"	v	class:UserBasic
 save	core/service.py	/^    def save(self, model):$/;"	m	class:Service
 save	users/user_service.py	/^    def save(self, model):$/;"	m	class:UserService
 save_session	core/session.py	/^    def save_session(self, app, session, response):$/;"	m	class:RedisSessionInterface
@@ -1010,12 +1095,20 @@ session	api/users.py	/^from flask import session, request$/;"	i
 session	core/service.py	/^from flask import request, session$/;"	i
 session_class	core/session.py	/^    session_class = RedisSession$/;"	v	class:RedisSessionInterface
 set_session	api/users.py	/^def set_session():$/;"	f
+share_count	actions/action.py	/^    share_count = IntField()$/;"	v	class:CommonActivity
+shopping	actions/action.py	/^    shopping = EmbeddedDocumentField(Shopping)$/;"	v	class:Activity
+signup_count	actions/action.py	/^    signup_count = IntField()$/;"	v	class:CommonActivity
+signups	actions/action.py	/^    signups = ListField(StringField())$/;"	v	class:CommonActivity
 sina_weibo_id	users/user.py	/^    sina_weibo_id = StringField(max_length=50)$/;"	v	class:SNS
 sina_weibo_nick	users/user.py	/^    sina_weibo_nick = StringField(max_length=50)$/;"	v	class:SNS
 sina_weibo_token	users/user.py	/^    sina_weibo_token = StringField(max_length=50)$/;"	v	class:SNS
+site_url	actions/action.py	/^    site_url = URLField()$/;"	v	class:Merchant
 sns_info	users/user.py	/^    sns_info = EmbeddedDocumentField(SNS)$/;"	v	class:User
 snslogin	api/users.py	/^def snslogin():$/;"	f
 snslogin	users/manager.py	/^def snslogin(sns_type, sns_id, sns_token, sns_nick, **args):$/;"	f
+star	actions/action.py	/^    star = IntField()$/;"	v	class:Comment
+start_date	actions/action.py	/^    start_date = DateTimeField(required=True)$/;"	v	class:Promotion
+start_loc	actions/action.py	/^    start_loc = EmbeddedDocumentField(Location)$/;"	v	class:Traffic
 statistic	users/user.py	/^    statistic = EmbeddedDocumentField(Statistic)$/;"	v	class:User
 status	users/user.py	/^    status = IntField()$/;"	v	class:UserBasic
 str_util	core/service.py	/^import common.utils.str_util$/;"	i
@@ -1032,21 +1125,29 @@ str_util	users/register.py	/^import common.utils.str_util as str_util$/;"	i
 str_util	users/snslogin.py	/^import common.utils.str_util as str_util$/;"	i
 string	common/utils/str_util.py	/^import string$/;"	i
 tags	users/user.py	/^    tags = ListField(StringField())$/;"	v	class:UserBasic
+tel	actions/action.py	/^    tel = StringField(max_length=50)$/;"	v	class:Merchant
 tel_number	users/user.py	/^    tel_number = StringField(max_length=50)$/;"	v	class:SNS
 test	app.py	/^def test():$/;"	f
 time	common/utils/date_util.py	/^import datetime, time $/;"	i
 timedelta	core/session.py	/^from datetime import timedelta$/;"	i
+title	actions/action.py	/^    title = StringField()$/;"	v	class:Promotion
+title	test.py	/^    title = StringField()$/;"	v	class:Post
+token	actions/action.py	/^    token = StringField(max_length=100)$/;"	v	class:CommonActivity
+traffic	actions/action.py	/^    traffic = EmbeddedDocumentField(Traffic)$/;"	v	class:Activity
 type	pbmodels/action_pb2.py	/^      type=None),$/;"	v
 type	pbmodels/message_pb2.py	/^      type=None),$/;"	v
 type	pbmodels/response_pb2.py	/^      type=None),$/;"	v
 type	pbmodels/user_pb2.py	/^      type=None),$/;"	v
-uid	relations/relation.py	/^    uid = ObjectIdField(required = True)$/;"	v	class:Relation
+u	test.py	/^        u = User(uname=str(i),nick=str(i))$/;"	v
+uname	test.py	/^    uname = StringField()$/;"	v	class:User
 uname	users/user.py	/^    uname = StringField(max_length=50, required=True, unique = True)$/;"	v	class:UserBasic
 unblack	api/relations.py	/^def unblack():$/;"	f
 unblack	relations/manager.py	/^def unblack(uid, fid):$/;"	f
 unfollow	api/relations.py	/^def unfollow():$/;"	f
 unfollow	relations/manager.py	/^def unfollow(uid, fid):$/;"	f
 update	core/service.py	/^    def update(self):$/;"	m	class:Service
+update_briefuser	users/user.py	/^    def update_briefuser(self, briefuser):$/;"	m	class:User
+update_briefusers	common/utils/response_util.py	/^def update_briefusers(res, users):$/;"	f
 update_pb	users/user.py	/^    def update_pb(self, basic_info):$/;"	m	class:UserBasic
 update_pb	users/user.py	/^    def update_pb(self, device_info):$/;"	m	class:Device
 update_pb	users/user.py	/^    def update_pb(self, log_info):$/;"	m	class:Log
@@ -1061,6 +1162,10 @@ update_user	api/users.py	/^def update_user():$/;"	f
 update_users	common/utils/response_util.py	/^def update_users(res, users):$/;"	f
 upload	api/users.py	/^def upload():$/;"	f
 upload_file	common/utils/upload_util.py	/^def upload_file(file, folder):$/;"	f
+user	actions/action.py	/^    user = ReferenceField(User)$/;"	v	class:Action
+user	actions/action.py	/^    user = ReferenceField(User)$/;"	v	class:Album
+user	actions/action.py	/^    user = ReferenceField(user)$/;"	v	class:Comment
+user	relations/relation.py	/^    user = ReferenceField(User)$/;"	v	class:Relation
 user_manager	relations/manager.py	/^import users.manager as user_manager$/;"	i
 user_manager	users/login.py	/^import users.manager as user_manager$/;"	i
 user_manager	users/register.py	/^import users.manager as user_manager$/;"	i
@@ -1112,3 +1217,6 @@ values	pbmodels/action_pb2.py	/^  values=[$/;"	v
 values	pbmodels/message_pb2.py	/^  values=[$/;"	v
 values	pbmodels/response_pb2.py	/^  values=[$/;"	v
 values	pbmodels/user_pb2.py	/^  values=[$/;"	v
+wap_url	actions/action.py	/^    wap_url = URLField()$/;"	v	class:Merchant
+web_url	actions/action.py	/^    web_url = URLField()$/;"	v	class:Merchant
+work_time	actions/action.py	/^    work_time = StringField(max_length=50)$/;"	v	class:Merchant

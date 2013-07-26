@@ -5,9 +5,8 @@ from mongoengine import *
 from pbmodels.user_pb2 import *
 
 class Relation(Document):
-    uid = ObjectIdField(required = True)
-    fid = ObjectIdField(required = True)
+    user = ReferenceField(User)
+    friend = ReferenceField(User)
     relation = IntField(required = True)
     c_date = DateTimeField()
     mark = StringField(max_length = 50)
-

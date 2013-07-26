@@ -23,6 +23,15 @@ def update_users(res, users):
         pbuser = res.users.add()
         user.update_pb(pbuser)
 
+def update_briefusers(res, users):
+    res.code = SUCCESS
+    if not users:
+        return
+    for user in users:
+        briefuser = res.briefusers.add()
+        user.update_briefuser(briefusers)
+
+
 
 SUCCESS_RESPONSE = get_error_response(SUCCESS)
 UNKNOW_ERROR_RESPONSE = get_error_response(UNKNOW_ERROR)
