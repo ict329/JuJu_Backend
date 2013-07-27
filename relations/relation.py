@@ -3,6 +3,7 @@
 # relation db model
 from mongoengine import *
 from pbmodels.user_pb2 import *
+from users.user import *
 
 class Relation(Document):
     user = ReferenceField(User)

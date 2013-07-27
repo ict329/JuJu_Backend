@@ -77,15 +77,20 @@ message PBStatistic{
 //total count
     optional int32 fan_count = 1;
     optional int32 follow_count= 2;
-    optional int32 my_activity = 3;
+    optional int32 activity_count = 3;
+    optional int32 share_count = 4;
+    optional int32 join_count = 5;
+    optional int32 favor_count = 6;
+    optional int32 invited_count = 7;
 
 //new count
 
     optional int32 new_fan_count = 20;
     optional int32 new_follow_count = 22;
     optional int32 new_message_count = 23;
-    optional int32 new_feed_count= 24;
-    optional int32 new_notice_count= 25;
+    optional int32 new_feed_count = 24;
+    optional int32 new_notice_count = 25;
+    optional int32 new_invited_count = 26;
 }
 
 
@@ -131,4 +136,8 @@ message PBBriefUser
     optional bool gender = 5;
     optional string avatar = 6;
     optional PBUserStatus status = 7[default=OFFLINE];
+
+    optional int32 follow_count = 10;
+    optional int32 fan_count = 11;
+    optional int32 activity_count= 12;
 }

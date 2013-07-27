@@ -65,16 +65,22 @@ class Log(EmbeddedDocument):
 class Statistic(EmbeddedDocument):
     fan_count = IntField()
     follow_count = IntField()
-    my_activity = IntField()
+    activity_count = IntField()
+    share_count = IntField()
+    join_count = IntField()
+    favor_count = IntField()
+    invited_count = IntField()
     
     new_fan_count = IntField()
     new_follow_count = IntField()
     new_message_count = IntField()
     new_feed_count= IntField()
     new_notice_count= IntField()
+    new_invited_count = IntField()
 
     def get_field_list(self):
-        return ('my_activity', 'fan_count', 'follow_count', \
+        return ('activity_count', 'share_count', 'join_count',\
+                'favor_count', 'fan_count', 'follow_count', \
                 'new_fan_count', 'new_follow_count', \
                 'new_message_count', 'new_feed_count', \
                 'new_notice_count')
@@ -142,9 +148,6 @@ class User(Document):
         l = ('uname','nick','role','gender','avatar','sttus')
         update_pb_with_document(briefuser, self.basic_info, l)
         briefuser.uid = str(self.pk)
-
-    def update_briefuser(self, briefuser):
-        pass
 
     def build_briefuser(self):
         briefuser = PBBriefUser()

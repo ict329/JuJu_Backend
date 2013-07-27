@@ -8,6 +8,8 @@ from pbmodels.response_pb2 import *
 from users.user import *
 from bson.objectid import ObjectId
 
+from common.models.basic import *
+
 
 import constant.db as db
 import constant.para as para
@@ -15,15 +17,7 @@ import constant.para as para
 class Album(Document):
     user = ReferenceField(User)
     name = StringField(max_length=50)
-    repeated string image_list 
     image_list = ListField(StringField())
-
-class Promotion(Document):
-    start_date = DateTimeField(required=True)
-    end_date = DateTimeField(required=True)
-    title = StringField()
-    content = StringField()
-    merchant = ReferenceField(Merchant)
 
 class Merchant(Document):
     aibang_id = StringField(max_length=50)
@@ -43,7 +37,14 @@ class Merchant(Document):
     wap_url = URLField()
     img_url = URLField()
 
-    promotions = ListField(ReferenceField(Promotion))
+    promotions = ListField(ObjectId)
+
+class Promotion(Document):
+    start_date = DateTimeField(required=True)
+    end_date = DateTimeField(required=True)
+    title = StringField()
+    content = StringField()
+    merchant = ReferenceField(Merchant)
 
 
 class CommonActivity(EmbeddedDocument):
@@ -95,11 +96,11 @@ class Action(Document):
     user = ReferenceField(User)
     activity = EmbeddedDocumentField(Activity) #if type is activity
     action_id = ObjectId() #if type is share or join
-    related_action = ReferenceField(Action)
+    related_action = ReferenceField('self')
 
 class Comment (Document):
     action= ReferenceField(Action)
-    user = ReferenceField(user)
+    user = ReferenceField(User)
     content = StringField()
     star = IntField()
     is_reply = BooleanField()
