@@ -55,7 +55,8 @@ class LoginService(JJService):
             self.session['uid'] = str(user.pk)
             self.session['uname'] = user.basic_info.uname
             self.session['role'] = user.basic_info.role
-            res = SUCCESS_RESPONSE
+            res = PBResponse()
+            res.code = SUCCESS
             user.update_pb(res.user)
             return res.SerializeToString()
         except Exception, e:

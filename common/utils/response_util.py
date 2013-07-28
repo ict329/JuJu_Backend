@@ -35,3 +35,5 @@ def update_briefusers(res, users):
 
 SUCCESS_RESPONSE = get_error_response(SUCCESS)
 UNKNOW_ERROR_RESPONSE = get_error_response(UNKNOW_ERROR)
+
+SUCCESS_RESPONSE_STRING = SUCCESS_RESPONSE.SerializeToString()
