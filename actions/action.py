@@ -14,6 +14,7 @@ from common.models.basic import *
 import constant.db as db
 import constant.para as para
 
+
 class Album(Document):
     user = ReferenceField(User)
     name = StringField(max_length=50)
@@ -95,16 +96,15 @@ class Action(Document):
     action_type = IntField(required=True)
     user = ReferenceField(User)
     activity = EmbeddedDocumentField(Activity) #if type is activity
-    action_id = ObjectId() #if type is share or join
     related_action = ReferenceField('self')
 
 class Comment (Document):
-    action= ReferenceField(Action)
+    action_id = ObjectId()
     user = ReferenceField(User)
     content = StringField()
     star = IntField()
     is_reply = BooleanField()
-    reply_action = ReferenceField(Action) 
+    reply_action_id = ObjectId()
     digest = StringField(max_length=80)
 
 

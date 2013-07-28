@@ -25,29 +25,26 @@ enum PBActionStatus
 
 message PBAlbum{
     required string album_id = 1;
-    required string uid = 2;
+    optional PBBriefUser user = 2;
     optional string name = 3;
     repeated string image_list = 4; 
 }
 
-message PBComment {
-    required string comment_id = 1;
-    required string string_id = 2;
-    required string uid = 3;
-    required int32 c_date = 4;
-    optional string content = 5;
-    optional int32 star = 6;
-    optional bool is_reply = 7;
-    optional string reply_id = 8;
-    optional string digest = 9;
-}
 
+enum PBPromotionStatus {
+    RUNNING = 0;
+    END = 1; 
+    PENDDING = 2;
+}
 
 message PBPromotion
 {
-    required int32 start_date = 1;
-    required int32 end_date = 2;
-    required string content = 3;
+    required string promotion_id = 1;
+    required int32 start_date = 2;
+    required int32 end_date = 3;
+    required string title = 4;
+    required string content = 5;
+    required PBPromotionStatus status = 6;
 }
 
 message PBMerchant
@@ -82,84 +79,39 @@ enum PBPayType{
     OTHER = 10;
 }
 
-//Activity Content
-message PBParty{
-    optional PBMerchant merchant = 1;
-    optional int32 member_limit = 2;
-    optional PBLocation location = 3;
-    optional PBContact contact = 4;
-    optional int32 join_deadtime = 5;
-    optional int32 hold_time = 6;
-    optional string content = 7;
-    repeated string photo_list = 8;
-    optional PBPayType pay_type = 9;
-}
-
-message PBTraffic{
-    optional int32 member_limit = 1;
-    optional PBLocation start_loc = 2;
-    optional PBLocation end_loc = 3;
-    optional PBContact contact = 4;
-    optional int32 join_deadtime = 5;
-    optional int32 hold_time = 6;
-    optional string content = 7;
-    optional PBPayType pay_type = 8;
-}
-
-message PBShopping{
-    optional PBMerchant merchant = 1;
-    optional int32 member_limit = 2;
-    optional PBLocation location = 3;
-    optional PBContact contact = 4;
-    optional int32 join_deadtime = 5;
-    optional int32 hold_time = 6;
-    optional string content = 7;
-    repeated string photo_list = 8;
-    optional PBPayType pay_type = 9;
-}
 
 message PBActivity{
-   required PBActivityType type = 1;
-   required int32 c_date = 2;
-   required string uid = 3;
+    optional PBActivityType type = 1;
+    optional string token = 2;
+    optional PBContact content = 3;
+    optional int32 join_deadtime = 4;
+    optional int32 hold_deadtime = 5;
+    optional PBPayType pay_type = 7;
+    optional float budget = 8;
+    optional float price = 9;
+    optional int32 member_limit = 10;
+    repeated string photo_list = 11;
+    repeated PBBriefUser participants = 12;
+    repeated PBBriefUser signups = 13;
 
-   //标记，用于生成二维码，签到的时候用到
-   optional string token = 4;
+    //count
+
+    optional int32 comment_count = 30;
+    optional int32 share_count = 31;
+    optional int32 participant_count = 32;
+    optional int32 mark_count = 33;
    
-   optional PBParty party = 10;
-   optional PBTraffic traffic = 11;
-   optional PBShopping shopping = 12;
+    //party && shopping attributes
 
-   //参考价格 可以从爱帮获取
-   optional int32 price = 13;
+    optional PBMerchant merchant = 50;
+    optional PBLocation location = 51;
 
-   //实到的人员列表
-   repeated string participants = 14;
-   //报名的人员列表
-   repeated string signups = 15;
 
-   //count
-   optional int32 comment_count = 50;
-   optional int32 share_count = 51;
-   //报名人数
-   optional int32 signup_count = 52;
-   //参加人数
-   optional int32 participant_count = 53;
-   //收藏人数
-   optional int32 mark_count = 54;
+    //traffic attributes
+    optional PBLocation start_loc = 70;
+    optional PBLocation end_loc = 71;
+
 }
-
-message PBJoin{
-    required string activity_id = 1;
-    optional PBActivity activity = 2;
-}
-
-message PBShare{
-    required string activity_id = 1;
-    optional PBActivity activity = 2;
-    optional string comment = 3;
-}
-
 
 message PBAction{
    required string action_id = 1;
@@ -167,8 +119,21 @@ message PBAction{
    required int32 c_date = 3;
    required PBBriefUser user = 4; //use for return
 
-   //one for select
-   optional PBActivity activity = 20;
-   optional PBShare share = 21;
-   optional PBJoin join = 22;
+   optional PBActivity activity = 20; //used for create activity
+   optional string comment = 21; //use for share or repost
+   optional PBAction related_action = 22; //used for share or join
+}
+
+
+
+message PBComment {
+    required string comment_id = 1;
+    required PBBriefUser user  = 2;
+    required int32 c_date = 3;
+    required string action_id = 4;
+    optional string content = 5;
+    optional int32 star = 6;
+    optional bool is_reply = 7;
+    optional string reply_action_id = 8;
+    optional string digest = 9;
 }
