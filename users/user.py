@@ -52,8 +52,7 @@ class SNS(EmbeddedDocument):
 class Log(EmbeddedDocument):
     last_log_date = DateTimeField()
     last_log_ip = StringField()
-    last_log_latitude = FloatField()
-    last_log_longitude = FloatField()
+    location = GeoPointField(auto_index=True, default=[0,0])
     
     def get_field_list(self):
         return ('last_log_ip', 'last_log_latitude', 'last_log_longitude')
@@ -61,6 +60,8 @@ class Log(EmbeddedDocument):
     def update_pb(self, log_info):
         update_pb_with_document(log_info, self, self.get_field_list())
         update_pb_with_value(log_info, 'last_log_date', datetime_to_timestamp(self.last_log_date))
+        update_pb_with_value(log_info, 'last_log_latitude',self.location[0]) 
+        update_pb_with_value(log_info, 'last_log_longitude',self.location[1]) 
 
 class Statistic(EmbeddedDocument):
     fan_count = IntField()

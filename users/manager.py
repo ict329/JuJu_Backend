@@ -20,6 +20,7 @@ def _set_value(dist, attr, src, field, nil_value):
     except:
         pass
 
+
 def _get_value_with_field(info, field):
     try:
         return info[field]
@@ -29,8 +30,13 @@ def _get_value_with_field(info, field):
 
 def _update_log_info(log_info, info):
     _set_value(log_info, 'last_log_ip', info, para.IP, None)
-    _set_value(log_info, 'last_log_latitude', info, para.LATITUDE, 0.0)
-    _set_value(log_info, 'last_log_longitude', info, para.LONGITUDE, 0.0)
+    
+    lat = _get_value_with_field(info, para.LATITUDE)
+    lng = _get_value_with_field(info, para.LONGITUDE)
+
+    if lat and lng:
+        log_info.location = [lat, lng]
+
     log_info.last_log_date = datetime.datetime.utcnow()
 
 
