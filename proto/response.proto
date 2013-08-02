@@ -34,6 +34,7 @@ message PBResponse
 {
     required PBResultCode code = 1;
     optional string error_message = 2;
+    optional bool has_more = 3;
     
     repeated PBAction actions = 10;
     repeated PBMessage messages = 11;

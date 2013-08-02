@@ -52,7 +52,7 @@ class SNS(EmbeddedDocument):
 class Log(EmbeddedDocument):
     last_log_date = DateTimeField()
     last_log_ip = StringField()
-    location = GeoPointField(auto_index=True, default=[0,0])
+    location = GeoPointField(default=[0,0])
     
     def get_field_list(self):
         return ('last_log_ip', 'last_log_latitude', 'last_log_longitude')
