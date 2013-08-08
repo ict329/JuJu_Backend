@@ -7,7 +7,7 @@ class Location(EmbeddedDocument):
     country_code = IntField(required=True)
     province = StringField(required=True)
     city = StringField(required=True)
-    position = GeoPointField(auto_index=True)
+    position = GeoPointField()
 
 class Contact(EmbeddedDocument):
     tel_numbers = ListField(StringField)
