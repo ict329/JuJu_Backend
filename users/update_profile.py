@@ -13,17 +13,16 @@ class UpdateProfileService(JJService):
         
         atts = ('password', 'new_password', 'nick', 'role', 'gender', \
                 'status', 'introduction', 'birth_date', \
-                'country_code', 'province', 'city', 'tags');
+                 'city', 'tags');
 
         paras = (R.PASSWORD, R.NEW_PASSWORD, R.NICK, R.ROLE,\
                 R.GENDER, R.STATUS, R.INTRODUCTION, R.BIRTH_DATE, \
-                R.COUNTRY_CODE, R.PROVINCE, R.CITY, R.TAGS)        
+                R.CITY, R.TAGS)        
 
         map(JJService._set_get_value_from_request, atts, paras)
         self.role = str_util.get_int_value(self.role)
         self.gender = str_util.get_bool_value(self.gender)
         self.status = str_util.get_int_value(self.status)
-        self.country_code = str_util.get_int_value(self.country_code)
         self.tags = str_util.get_list_value(self.tags)
 
     def _check_parameters(self):
@@ -45,8 +44,7 @@ class UpdateProfileService(JJService):
             user = user_manager.update_profile(self.uid, new_password=self.new_password, \
                         nick=self.nick, gender=self.gender, status = self.status, \
                         introduction=self.introduction, birth_date=self.birth_date, \
-                        country_code=self.country_code, province=self.province, city=self.city,\
-                        tags=self.tags,
+                        city=self.city, tags=self.tags,\
                         ) 
             res = response_util.get_error_response(SUCCESS)
             user.update_pb(res.user)

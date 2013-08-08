@@ -20,6 +20,7 @@ class UserBasic(EmbeddedDocument):
     introduction = StringField()
     birth_date = DateTimeField()
     tags = ListField(StringField())
+    city = StringField()
 
     def get_field_list(self):
         return ('uname', 'nick', 'role', 'gender', 'avatar', 'status','introduction','mark','relation')

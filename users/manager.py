@@ -55,12 +55,20 @@ def _update_user_device_log_info(user, args):
         user.device_info = Device()
     _update_device_info(user.device_info, args)
 
+
 def update_profile(uid, **profile):
     user = get_user(self.uid)
     if user:
-        #TODO set attributes
-        pass
-
+        _set_value(user, 'nick', profile, para.NICK, None)
+        _set_value(user, 'password', profile, para.NEW_PASSWORD, None)
+        _set_value(user, 'gender', profile, para.GENDER, None)
+        _set_value(user, 'status', profile, para.STATUS, 0)
+        _set_value(user, 'introduction', profile, para.INTRODUCTION, None)
+        _set_value(user, 'birth_date', profile, para.BIRTH_DATE, None)
+        _set_value(user, 'tags', profile, para.TAGS, None)
+        _set_value(user, 'avatar', profile, para.AVATAR, None)
+        _set_value(user, 'city', profile, para.CITY, None)
+        user.save()
     return user
 
 def login(uname, password, **args):
