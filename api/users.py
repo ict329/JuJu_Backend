@@ -30,6 +30,22 @@ def logout():
 def snslogin():
     return SNSLoginService(request).handle()
 
+
+@bp.route('/updateprofile', methods = ['GET', 'POST'])
+def updateprofile():
+    if request.method == 'POST':
+        return UpdateProfileService(request).handle() 
+    return  """
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+           <input type=submit value=Upload>
+     </form>
+     """
+
+
 @bp.route('/upload', methods=['GET','POST'])
 def upload():
     if request.method == 'POST':

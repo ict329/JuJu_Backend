@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import common.utils.str_util
-import common.utils.request_util
 import logging
 
 
@@ -79,4 +78,25 @@ class JJService(object):
 #            self.code = SYSTEM_ERROR
 #            response = get_error_response(self.code)
 #            return response.SerializeToString()
+
+
+
+# Utils 
+
+    def _set_get_value_from_request(self, attr_name, para_name):
+        try:
+            value = request_util.get_value(self.request, para_name)
+            setattr(self, attr_name, value)
+            return value
+        except:
+            return None
+
+    def _set_flie_value_from_request(self, attr_name, file_name):
+        try:
+            value = request_util.get_file(self.request, file_name)
+            setattr(self, attr_name, value)
+            return value
+        except:
+            return None
+
 

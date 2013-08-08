@@ -18,4 +18,11 @@ def get_float_value(str_value, default_value = 0.0):
 def is_empty(str_value):
     return not str_value or not str_value.strip()
 
+def get_bool_value(str_value, default_value = False):
+    return get_type_value(bool, str_value, default_value)
 
+def get_list_value(str_value, split="::"):
+    try:
+        return str_value.split(split)
+    except:
+        return None

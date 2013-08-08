@@ -55,7 +55,13 @@ def _update_user_device_log_info(user, args):
         user.device_info = Device()
     _update_device_info(user.device_info, args)
 
+def update_profile(uid, **profile):
+    user = get_user(self.uid)
+    if user:
+        #TODO set attributes
+        pass
 
+    return user
 
 def login(uname, password, **args):
     user = User.objects.get(basic_info__uname = uname, basic_info__password = password)
