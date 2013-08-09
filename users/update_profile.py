@@ -3,6 +3,7 @@ import constant.para as R
 import common.utils.request_util as request_util
 import users.manager as user_manager
 import common.utils.str_util as str_util
+import common.utils.upload_util as upload_util
 from users.user import *
 
 class UpdateProfileService(JJService):
@@ -40,7 +41,8 @@ class UpdateProfileService(JJService):
 
     def _handle_data(self):
         try:
-            self.avatar = request_util.get_file(self.request, para.AVATAR)
+            avatar = request_util.get_file(self.request, para.AVATAR)
+            self.avatar = upload_util.upload_file(avatar)
             user = user_manager.update_profile(self.uid, new_password=self.new_password, \
                         nick=self.nick, gender=self.gender, status = self.status, \
                         introduction=self.introduction, birth_date=self.birth_date, \
