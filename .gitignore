@@ -6,3 +6,7 @@ rmpyc.sh
 tags
 task.txt
 build_pb.sh
+bin/
+include/
+lib/
+local/
