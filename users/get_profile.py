@@ -1,5 +1,8 @@
 from flask import request
 from core.service import JJService
+import users.manager as user_manager
+import common.utils.response_util as response_util
+from users.user import *
 
 class GetProfileService(JJService):
     def __init__(self, request):
@@ -11,6 +14,8 @@ class GetProfileService(JJService):
     def _check_parameters(self):
         if not JJService._check_parameters(self):
             return False
+        if not self.uid:
+            return False
         return True
 
     def _authenticate(self):
@@ -19,7 +24,10 @@ class GetProfileService(JJService):
         return True
 
     def _handle_data(self):
-        return self.__class__.__name__ 
-
-    def _handle_error(self):
-        return self.__class__.__name__ 
+        user = user_manager.get_user(self.uid)
+        if user:
+            res = response_util.get_error_response(SUCCESS)
+            #TODO cut some attributes from user
+            user.update_pb(res.user)
+            return res.SerializeToString() 
+        return UNKNOW_ERROR_RESPONSE.SerializeToString()

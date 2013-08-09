@@ -6,6 +6,10 @@ import api
 from mongoengine import connect
 from settings import * 
 from core.session import RedisSessionInterface
+import logging
+
+
+log = logging.getLogger("app")
 
 def create_app():
     app = Flask(__name__)
@@ -19,9 +23,8 @@ def register_all_blueprints(app):
     """
     register_blueprints(app, api.__name__, api.__path__)
 
+
 app = create_app()
-register_all_blueprints(app)
-connect(DATABASE, host = MONGO_HOST, port = MONGO_PORT)
 
 @app.route("/favicon.ico")
 def favicon():
@@ -32,4 +35,10 @@ def test():
     return 'Hello World!'
 
 if __name__ == '__main__':
+    register_all_blueprints(app)
+    try:
+        connect(DATABASE, host = MONGO_HOST, port = MONGO_PORT)
+        log.info('Connect database success!')
+    except:
+        log.error('Connect database error!')
     app.run(host='0.0.0.0',port=8080)

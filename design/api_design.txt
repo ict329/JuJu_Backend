@@ -72,21 +72,15 @@ User (Error Code from 10000 - 19999)
             Requests:
                 //Basic info
                 nick
-                password
-                role //PBUserRole 
+                new_password
                 gender 
                 avatar 
                 status //PBUserStatus 
                 introduction 
                 birth_date
-                note_name 
 
                 //Location
-                contury_code 
-                province 
                 city 
-                latitude 
-                longitude 
                 tags
 
 
@@ -96,16 +90,6 @@ User (Error Code from 10000 - 19999)
 
                 PBUser 
                
-/////////////////////////////////////////////////////////
-
-         Update Device
-            Request
-                device_id 
-                device_os 
-                device_token 
-                device_name 
-
-
 /////////////////////////////////////////////////////////
 
         Bind SNS (10500)
