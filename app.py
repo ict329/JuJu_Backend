@@ -9,6 +9,7 @@ from core.session import RedisSessionInterface
 import logging
 
 
+logging.basicConfig(level = logging.DEBUG)
 log = logging.getLogger("app")
 
 def create_app():

@@ -28,7 +28,6 @@ class Service(object):
 
 class JJService(object):
 
-    logging.basicConfig(level = logging.DEBUG)
     log = logging.getLogger('Service')
 
     def __init__(self, request):
