@@ -45,6 +45,7 @@ message PBPromotion
     required string title = 4;
     required string content = 5;
     required PBPromotionStatus status = 6;
+    optional string merchant_id = 7;
 }
 
 message PBMerchant
@@ -69,7 +70,8 @@ message PBMerchant
     optional string wap_url = 17;
     optional string img_url = 18;
     
-    repeated PBPromotion promotions = 30;
+    repeated PBPromotion promotions = 30; //used for store in client.
+    repeated string promotion_ids = 31; //used to return from server
 }
 
 

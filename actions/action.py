@@ -19,6 +19,17 @@ class Album(Document):
     user = ReferenceField(User)
     name = StringField(max_length=50)
     image_list = ListField(StringField())
+    
+
+    def get_field_list(self):
+        return ('name')
+
+    def update_pb(self, pb):
+        update_pb_with_document(pb, self, self.get_field_list())
+        update_pb_with_list(pb, 'image_list', image_list)
+        update_pb_with_value(pb, 'album_id', str(self.pk))
+        self.user.update_briefuser(pb.user)
+
 
 class Merchant(Document):
     aibang_id = StringField(max_length=50)
@@ -33,12 +44,26 @@ class Merchant(Document):
     lng = FloatField()
     lat = FloatField()
     work_time = StringField(max_length=50)
-    site_url = URLField()
-    web_url = URLField()
-    wap_url = URLField()
-    img_url = URLField()
+    site_url = StringField()
+    web_url = StringField()
+    wap_url = StringField()
+    img_url = StringField()
 
     promotions = ListField(ObjectId)
+
+
+    def get_field_list(self):
+        return ("aibang_id", "name", "county", "addr", "tel",\
+                "cate", "rate", "cost", "desc", "lng", "lat", \
+                "work_time", "site_url", "web_url", "wap_url", )
+
+    def update_pb(self, pb):
+        update_pb_with_document(pb, self, self.get_field_list())
+        update_pb_with_value(pb, 'merchant_id', str(self.pk))
+
+        promotion_ids = [str(p_id) for p_id in promotions]
+        update_pb_with_list(pb, 'promotion_ids', promotion_ids)
+
 
 class Promotion(Document):
     start_date = DateTimeField(required=True)
