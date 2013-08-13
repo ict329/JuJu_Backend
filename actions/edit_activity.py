@@ -1,9 +1,7 @@
 from flask import request
 from core.service import JJService
 
-#get global actions by category
-
-class GetActionsService(JJService):
+class EditActivityService(JJService):
     def __init__(self, request):
         JJService.__init__(self, request)
    
@@ -21,7 +19,4 @@ class GetActionsService(JJService):
         return True
 
     def _handle_data(self):
-        return self.__class__.__name__ 
-
-    def _handle_error(self):
         return self.__class__.__name__ 

@@ -1,9 +1,9 @@
 from flask import request
 from core.service import JJService
 
-#get global actions by category
+#get nearby actiongs
 
-class GetActionsService(JJService):
+class GetNearbyActionsService(JJService):
     def __init__(self, request):
         JJService.__init__(self, request)
    

@@ -1,9 +1,10 @@
 from flask import request
 from core.service import JJService
 
-#get global actions by category
 
-class GetActionsService(JJService):
+#get user actions: create, join, signup, favor
+
+class GetUserActionsService(JJService):
     def __init__(self, request):
         JJService.__init__(self, request)
    
