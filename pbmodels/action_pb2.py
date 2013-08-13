@@ -225,6 +225,13 @@ _PBPROMOTION = descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    descriptor.FieldDescriptor(
+      name='merchant_id', full_name='PBPromotion.merchant_id', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -366,6 +373,13 @@ _PBMERCHANT = descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    descriptor.FieldDescriptor(
+      name='promotion_ids', full_name='PBMerchant.promotion_ids', index=18,
+      number=31, type=9, cpp_type=9, label=3,
+      default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -453,14 +467,14 @@ _PBACTIVITY = descriptor.Descriptor(
       options=None),
     descriptor.FieldDescriptor(
       name='participants', full_name='PBActivity.participants', index=10,
-      number=12, type=11, cpp_type=10, label=3,
+      number=12, type=9, cpp_type=9, label=3,
       default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='signups', full_name='PBActivity.signups', index=11,
-      number=13, type=11, cpp_type=10, label=3,
+      number=13, type=9, cpp_type=9, label=3,
       default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -680,8 +694,6 @@ _PBMERCHANT.fields_by_name['promotions'].message_type = _PBPROMOTION
 _PBACTIVITY.fields_by_name['type'].enum_type = _PBACTIVITYTYPE
 _PBACTIVITY.fields_by_name['content'].message_type = basic_pb2._PBCONTACT
 _PBACTIVITY.fields_by_name['pay_type'].enum_type = _PBPAYTYPE
-_PBACTIVITY.fields_by_name['participants'].message_type = user_pb2._PBBRIEFUSER
-_PBACTIVITY.fields_by_name['signups'].message_type = user_pb2._PBBRIEFUSER
 _PBACTIVITY.fields_by_name['merchant'].message_type = _PBMERCHANT
 _PBACTIVITY.fields_by_name['location'].message_type = basic_pb2._PBLOCATION
 _PBACTIVITY.fields_by_name['start_loc'].message_type = basic_pb2._PBLOCATION

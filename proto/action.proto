@@ -93,8 +93,8 @@ message PBActivity{
     optional float price = 9;
     optional int32 member_limit = 10;
     repeated string photo_list = 11;
-    repeated PBBriefUser participants = 12;
-    repeated PBBriefUser signups = 13;
+    repeated string participants = 12;
+    repeated string signups = 13;
 
     //count
 

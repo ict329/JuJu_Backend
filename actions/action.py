@@ -61,7 +61,7 @@ class Merchant(Document):
         update_pb_with_document(pb, self, self.get_field_list())
         update_pb_with_value(pb, 'merchant_id', str(self.pk))
 
-        promotion_ids = [str(p_id) for p_id in promotions]
+        promotion_ids = [str(p_id) for p_id in self.promotions]
         update_pb_with_list(pb, 'promotion_ids', promotion_ids)
 
 
@@ -70,10 +70,20 @@ class Promotion(Document):
     end_date = DateTimeField(required=True)
     title = StringField()
     content = StringField()
-    merchant = ReferenceField(Merchant)
+    merchant_id = ObjectIdField()
 
+    def get_field_list(self):
+        return ("promotion_id","title","content","status",)
+
+    def update_pb(self, pb):
+        update_pb_with_list(pb, self, self.get_field_list())
+        update_pb_with_document(pb, 'merchant_id', str(self.merchant_id))
+        update_pb_with_value(pb, 'promotion_id', str(self.pk))
+        update_pb_with_value(pb, 'start_date', datetime_to_timestamp(self.start_date))
+        update_pb_with_value(pb, 'end_date', datetime_to_timestamp(self.end_date))
 
 class CommonActivity(EmbeddedDocument):
+
     token = StringField(max_length=100)
     location = EmbeddedDocumentField(Location)
     contact = EmbeddedDocumentField(Contact)
@@ -86,8 +96,8 @@ class CommonActivity(EmbeddedDocument):
     member_limit = IntField()
     photo_list = ListField(StringField())
 
-    participants = ListField(StringField())
-    signups = ListField(StringField())
+    participants = ListField(ObjectIdField())
+    signups = ListField(ObjectIdField())
 
     comment_count = IntField()
     share_count = IntField()
@@ -96,7 +106,14 @@ class CommonActivity(EmbeddedDocument):
     mark_count = IntField()
 
     meta = {'allow_inheritance': True}
+#type = 1;
 
+
+    def get_field_list(self):
+        return ("token", "pay_type", "budget", "price", "member_limit",\
+            "photo_list", "participants", "signups", "comment_count", \
+            "share_count", "participant_count", "mark_count", "content", \
+            "join_deadtime", "hold_deadtime", "merchant", "location", "start_loc", "end_loc",)
 
 class Party(CommonActivity):
     merchant = ReferenceField(Merchant)
